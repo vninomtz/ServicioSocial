@@ -14,16 +14,16 @@
       <AnchorPane layoutX="285.0" layoutY="33.0" prefHeight="312.0" prefWidth="293.0" style="-fx-background-color: #FFFFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="97.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
-            <JFXPasswordField labelFloat="true" layoutX="38.0" layoutY="230.0" prefHeight="25.0" prefWidth="211.0" promptText="Contraseña" AnchorPane.leftAnchor="36.0">
+            <JFXPasswordField fx:id="txtContrasenia" labelFloat="true" layoutX="38.0" layoutY="230.0" prefHeight="25.0" prefWidth="211.0" promptText="Contraseña" AnchorPane.leftAnchor="36.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </JFXPasswordField>
-            <JFXTextField labelFloat="true" layoutX="36.0" layoutY="166.0" prefHeight="25.0" prefWidth="217.0" promptText="Usuario" AnchorPane.leftAnchor="36.0">
+            <JFXTextField fx:id="txtUsuario" labelFloat="true" layoutX="36.0" layoutY="166.0" prefHeight="25.0" prefWidth="217.0" promptText="Usuario" AnchorPane.leftAnchor="36.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></JFXTextField>
-            <JFXButton buttonType="RAISED" layoutX="36.0" layoutY="290.0" prefHeight="25.0" prefWidth="211.0" style="-fx-background-color: #029931;" text="Iniciar Sesión" textFill="WHITE">
+            <JFXButton fx:id="btnIniciarSesion" buttonType="RAISED" layoutX="36.0" layoutY="290.0" prefHeight="25.0" prefWidth="211.0" style="-fx-background-color: #029931;" text="Iniciar Sesión" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

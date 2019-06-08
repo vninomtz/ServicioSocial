@@ -1,11 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.MenuPrincipalController">
-    
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #FFFFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.MenuPrincipalController">
+   <children>
+      <TableView fx:id="tablaEstudiantes" layoutX="366.0" layoutY="86.0" prefHeight="305.0" prefWidth="469.0" styleClass="tablaAlumnos" stylesheets="@../styles/Styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="86.0">
+        <columns>
+          <TableColumn fx:id="colMatricula" prefWidth="104.0" text="Matrícula" />
+          <TableColumn fx:id="colNombre" prefWidth="168.0" text="Nombre" />
+            <TableColumn fx:id="colProgramaEducativo" prefWidth="191.0" text="Programa Educativo" />
+        </columns>
+      </TableView>
+      <AnchorPane layoutX="14.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #dee6f2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="32.0">
+         <children>
+            <ImageView fitHeight="77.0" fitWidth="169.0" layoutX="26.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/LIS_Logo.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="btnVerDocumentos" layoutY="168.0" prefHeight="45.0" prefWidth="200.0" stylesheets="@../styles/Styles.css" text="Ver Documentos" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></JFXButton>
+            <JFXButton fx:id="btnVerReportesMensuales" layoutY="217.0" prefHeight="45.0" prefWidth="200.0" stylesheets="@../styles/Styles.css" text="Ver Reportes Mensuales" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnRegistrarProyecto" layoutY="266.0" prefHeight="45.0" prefWidth="200.0" stylesheets="@../styles/Styles.css" text="Registrar Proyecto" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="700.0" styleClass="menuBar" stylesheets="@../styles/Styles.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Estudiantes">
+               <items>
+                  <MenuItem fx:id="mtAdministrarEstudiantes" mnemonicParsing="false" text="Administrar" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Servicio Social">
+               <items>
+                  <MenuItem fx:id="mtAdministrarServicioSocial" mnemonicParsing="false" text="Administrar" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Cuenta">
+               <items>
+                  <MenuItem fx:id="mtSalirCuenta" mnemonicParsing="false" text="Salir" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <JFXTextField fx:id="txtBuscarEstudiante" layoutX="527.0" layoutY="42.0" prefHeight="25.0" prefWidth="159.0" promptText="Ej: Juan Carlos" AnchorPane.rightAnchor="14.0" />
+      <JFXButton fx:id="btnBuscar" buttonType="RAISED" layoutX="453.0" layoutY="44.0" style="-fx-background-color: #0055A3;" text="Buscar" textFill="WHITE" AnchorPane.rightAnchor="193.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <Separator layoutY="31.0" prefHeight="0.0" prefWidth="682.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+   </children>
 </AnchorPane>

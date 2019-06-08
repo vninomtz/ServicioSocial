@@ -5,6 +5,7 @@ import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 
@@ -12,10 +13,11 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/InicioSesion.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/MenuPrincipal.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
+        //scene.getStylesheets().add("/styles/Styles.css");
         stage.setTitle("Servicio Social - Inicio Sesion");
+        stage.getIcons().add(new Image("/fxml/img/User1.png"));
         stage.setScene(scene);
         stage.show();
     }
