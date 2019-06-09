@@ -10,6 +10,7 @@ package modelo;
  * @author Vik-t
  */
 public class ReporteMensual {
+
     private String estado;
     private int horasReportadas;
     private String link;
@@ -17,11 +18,13 @@ public class ReporteMensual {
     private String nombre;
     private int numeroReporte;
     private int idSeguimiento;
+    private int idReporteMensual;
 
     public ReporteMensual() {
     }
 
-    public ReporteMensual(String estado, int horasReportadas, String link, String mes, String nombre, int numeroReporte, int idSeguimiento) {
+    public ReporteMensual(String estado, int horasReportadas, String link, String mes, String nombre, int numeroReporte, int idSeguimiento, 
+            int idReporteMensual) {
         this.estado = estado;
         this.horasReportadas = horasReportadas;
         this.link = link;
@@ -29,6 +32,15 @@ public class ReporteMensual {
         this.nombre = nombre;
         this.numeroReporte = numeroReporte;
         this.idSeguimiento = idSeguimiento;
+        this.idReporteMensual = idReporteMensual;
+    }
+
+    public int getIdReporteMensual() {
+        return idReporteMensual;
+    }
+
+    public void setIdReporteMensual(int idReporteMensual) {
+        this.idReporteMensual = idReporteMensual;
     }
 
     public String getEstado() {
@@ -86,6 +98,5 @@ public class ReporteMensual {
     public void setIdSeguimiento(int idSeguimiento) {
         this.idSeguimiento = idSeguimiento;
     }
-    
-    
+
 }

@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao.inscripcionDAO;
+package dao.reportemensualDAO;
 
 import java.util.List;
-import modelo.Inscripcion;
+import modelo.ReporteMensual;
 
 /**
  *
- * @author Vik-t
+ * @author alanglezh
  */
-public interface IInscripcion {
-    public List<Inscripcion> getInscripciones();
-    public List<Inscripcion>  getInscripcion(int idEstudiante);
+public interface IReporteMensual {
+    public List<ReporteMensual> getReportes(int idSeguimiento); 
 }
