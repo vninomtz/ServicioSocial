@@ -11,6 +11,8 @@ import dao.inscripcionDAO.InscripcionImp;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,6 +21,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
+import javax.swing.JOptionPane;
 import modelo.Estudiante;
 import modelo.Inscripcion;
 
@@ -29,13 +33,13 @@ import modelo.Inscripcion;
 public class MenuPrincipalController implements Initializable {
 
     @FXML
-    private TableView<Estudiante> tablaEstudiantes;
+    private TableView<Inscripcion> tablaEstudiantes;
     @FXML
-    private TableColumn<Estudiante, String> colMatricula;
+    private TableColumn<Inscripcion, String> colMatricula;
     @FXML
-    private TableColumn<Estudiante, String> colNombre;
+    private TableColumn<Inscripcion, String> colNombre;
     @FXML
-    private TableColumn<Estudiante, String> colProgramaEducativo;
+    private TableColumn<Inscripcion, String> colProgramaEducativo;
     @FXML
     private JFXButton btnVerDocumentos;
     @FXML
@@ -58,21 +62,56 @@ public class MenuPrincipalController implements Initializable {
     private void llenarTablaEstudiantes() {
         InscripcionImp inscripcionImp = new InscripcionImp();
         listaInscripciones = inscripcionImp.getInscripciones();
-        colMatricula.setCellValueFactory(new PropertyValueFactory("matricula"));
-        colNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
-        colProgramaEducativo.setCellValueFactory(new PropertyValueFactory("programaEducativo"));
-
-        ObservableList<Estudiante> observableList = FXCollections.observableArrayList();
-        listaInscripciones.forEach((lista) -> {
-            observableList.add(lista.getEstudiante());
-        });
+        
+        colMatricula.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Inscripcion, String>,
+                ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Inscripcion, String> inscripcion) {
+                if(inscripcion.getValue() != null) {
+                    return new SimpleStringProperty(inscripcion.getValue().getEstudiante().getMatricula());
+                } else {
+                    return new SimpleStringProperty("<no name>");
+                }
+            }
+                    
+                });
+        colNombre.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Inscripcion, String>,
+                ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Inscripcion, String> inscripcion) {
+                if(inscripcion.getValue() != null) {
+                    return new SimpleStringProperty(inscripcion.getValue().getEstudiante().toString());
+                } else {
+                    return new SimpleStringProperty("<no name>");
+                }
+            }
+                    
+                });
+        
+        colProgramaEducativo.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Inscripcion, String>,
+                ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Inscripcion, String> inscripcion) {
+                if(inscripcion.getValue() != null) {
+                    return new SimpleStringProperty(inscripcion.getValue().getEstudiante().getProgramaEducativo());
+                } else {
+                    return new SimpleStringProperty("<no name>");
+                }
+            }
+                    
+                });
+        
+        ObservableList<Inscripcion> observableList = 
+                FXCollections.observableArrayList(listaInscripciones);
         tablaEstudiantes.setItems(observableList);
+        
     }
 
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         llenarTablaEstudiantes();
+        
     }
 
 }
