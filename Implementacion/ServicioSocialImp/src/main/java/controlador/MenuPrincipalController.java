@@ -100,6 +100,7 @@ public class MenuPrincipalController implements Initializable {
         }
     }*/
 
+    
     private void llenarTablaEstudiantes() {
         InscripcionImp inscripcionImp = new InscripcionImp();
         listaInscripciones = inscripcionImp.getInscripciones();
@@ -113,6 +114,8 @@ public class MenuPrincipalController implements Initializable {
         });
         tablaEstudiantes.setItems(observableList);
     }
+    
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
