@@ -100,6 +100,37 @@ public class MenuPrincipalController implements Initializable {
             System.out.println("Error al mostrar ventana Ventas: " + ex);
         }
     }
+    
+    @FXML 
+    private void clicBtVerDocumentos() {
+        try {
+            Inscripcion inscripcion = tablaEstudiantes.getSelectionModel().getSelectedItem();
+            if (inscripcion != null) {
+                FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/VerDocumentos.fxml"));
+                AnchorPane anchorpane = loader.load();
+                Scene scene = new Scene(anchorpane);
+                scene.getStylesheets().add("/styles/Styles.css");
+                Stage stage = new Stage();
+                stage.setTitle("Documentos");
+                stage.getIcons().add(new Image("/fxml/img/documento.png"));
+                stage.setScene(scene);
+                stage.setResizable(false);
+                VerDocumentosController controller = (VerDocumentosController) loader.getController();
+                controller.setInscripcion(inscripcion);
+                stage.show();
+                Stage principal = (Stage) btnVerDocumentos.getScene().getWindow();
+                principal.close();
+            } else {
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("Advertencia");
+                alert.setHeaderText("Seleccione un estudiante primero");
+                alert.showAndWait();
+            }
+
+        } catch (IOException ex) {
+            System.out.println("Error al mostrar ventana Ventas: " + ex);
+        }
+    }
 
     
     private void llenarTablaEstudiantes() {
