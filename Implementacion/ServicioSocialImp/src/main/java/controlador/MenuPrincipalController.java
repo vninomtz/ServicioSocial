@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -30,6 +32,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import modelo.Estudiante;
 import modelo.Inscripcion;
 import serviciosocial.main.MainApp;
@@ -41,13 +44,13 @@ import serviciosocial.main.MainApp;
 public class MenuPrincipalController implements Initializable {
 
     @FXML
-    private TableView<Estudiante> tablaEstudiantes;
+    private TableView<Inscripcion> tablaEstudiantes;
     @FXML
-    private TableColumn<Estudiante, String> colMatricula;
+    private TableColumn<Inscripcion, String> colMatricula;
     @FXML
-    private TableColumn<Estudiante, String> colNombre;
+    private TableColumn<Inscripcion, String> colNombre;
     @FXML
-    private TableColumn<Estudiante, String> colProgramaEducativo;
+    private TableColumn<Inscripcion, String> colProgramaEducativo;
     @FXML
     private JFXButton btnVerDocumentos;
     @FXML
@@ -70,11 +73,11 @@ public class MenuPrincipalController implements Initializable {
     
   
 
-   /* @FXML
+   @FXML
     private void clicBtVerReportes() {
         try {
-            Estudiante estudiante = obtenerEstudianteSeleccionado();
-            if (estudiante != null) {
+            Inscripcion inscripcion = tablaEstudiantes.getSelectionModel().getSelectedItem();
+            if (inscripcion != null) {
                 FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/VerReportes.fxml"));
                 AnchorPane anchorpane = loader.load();
                 Scene scene = new Scene(anchorpane);
@@ -84,34 +87,65 @@ public class MenuPrincipalController implements Initializable {
                 stage.setScene(scene);
                 stage.setResizable(false);
                 VerReportesController controller = (VerReportesController) loader.getController();
-                controller.setEstudiante(estudiante);
+                controller.setInscripcion(inscripcion);
                 stage.show();
             } else {
                 Alert alert = new Alert(AlertType.WARNING);
                 alert.setTitle("Advertencia");
                 alert.setHeaderText("Seleccione un estudiante primero");
-                
-
                 alert.showAndWait();
             }
 
         } catch (IOException ex) {
             System.out.println("Error al mostrar ventana Ventas: " + ex);
         }
-    }*/
+    }
 
     
     private void llenarTablaEstudiantes() {
         InscripcionImp inscripcionImp = new InscripcionImp();
         listaInscripciones = inscripcionImp.getInscripciones();
-        colMatricula.setCellValueFactory(new PropertyValueFactory("matricula"));
-        colNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
-        colProgramaEducativo.setCellValueFactory(new PropertyValueFactory("programaEducativo"));
-
-        ObservableList<Estudiante> observableList = FXCollections.observableArrayList();
-        listaInscripciones.forEach((lista) -> {
-            observableList.add(lista.getEstudiante());
-        });
+        
+        colMatricula.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Inscripcion, String>,
+                ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Inscripcion, String> inscripcion) {
+                if(inscripcion.getValue() != null) {
+                    return new SimpleStringProperty(inscripcion.getValue().getEstudiante().getMatricula());
+                } else {
+                    return new SimpleStringProperty("<no name>");
+                }
+            }
+                    
+                });
+        colNombre.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Inscripcion, String>,
+                ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Inscripcion, String> inscripcion) {
+                if(inscripcion.getValue() != null) {
+                    return new SimpleStringProperty(inscripcion.getValue().getEstudiante().toString());
+                } else {
+                    return new SimpleStringProperty("<no name>");
+                }
+            }
+                    
+                });
+        
+        colProgramaEducativo.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Inscripcion, String>,
+                ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Inscripcion, String> inscripcion) {
+                if(inscripcion.getValue() != null) {
+                    return new SimpleStringProperty(inscripcion.getValue().getEstudiante().getProgramaEducativo());
+                } else {
+                    return new SimpleStringProperty("<no name>");
+                }
+            }
+                    
+                });
+        
+        ObservableList<Inscripcion> observableList = 
+                FXCollections.observableArrayList(listaInscripciones);
         tablaEstudiantes.setItems(observableList);
     }
     
