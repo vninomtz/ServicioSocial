@@ -11,6 +11,7 @@ package modelo;
  */
 public class Estudiante {
     private int idEstudiante;
+    private String matricula;
     private String nombre;
     private String paterno;
     private String materno;
@@ -20,16 +21,17 @@ public class Estudiante {
     private String telefono;
     private String nombreContacto;
     private String telefonoContacto;
-    private InicioSesion inicioSesion;
+    private InicioSesion inicioSesion = new InicioSesion();
 
     public Estudiante() {
     }
 
-    public Estudiante(int idEstudiante, String nombre, String paterno, 
-            String materno, String programaEducativo, String email, 
-            float promedio, String telefono, String nombreContacto, 
+    public Estudiante(int idEstudiante, String matricula, String nombre, 
+            String paterno, String materno, String programaEducativo, 
+            String email, float promedio, String telefono, String nombreContacto, 
             String telefonoContacto, InicioSesion inicioSesion) {
         this.idEstudiante = idEstudiante;
+        this.matricula = matricula;
         this.nombre = nombre;
         this.paterno = paterno;
         this.materno = materno;
@@ -42,6 +44,8 @@ public class Estudiante {
         this.inicioSesion = inicioSesion;
     }
 
+    
+
     public int getIdEstudiante() {
         return idEstudiante;
     }
@@ -50,6 +54,14 @@ public class Estudiante {
         this.idEstudiante = idEstudiante;
     }
 
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -130,6 +142,9 @@ public class Estudiante {
         this.inicioSesion = inicioSesion;
     }
     
-    
+    @Override 
+    public String toString() {
+        return nombre + " " + paterno + " " + materno;
+    }
     
 }

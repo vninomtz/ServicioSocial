@@ -15,6 +15,7 @@ import java.util.List;
 public class Seguimiento {
     private int idSeguimiento;
     private double calificacion;
+    private String estado;
     private int horasAcumuladas;
     private List<Documento> listaDocumentos = new ArrayList();
     private List<ReporteMensual> listaReportesMensuales = new ArrayList();
@@ -24,11 +25,12 @@ public class Seguimiento {
     public Seguimiento() {
     }
 
-    public Seguimiento(int idSeguimiento, double calificacion, int horasAcumuladas,
+    public Seguimiento(int idSeguimiento, double calificacion, String estado, int horasAcumuladas,
             List<Documento> listaDocumentos,List<ReporteMensual> listaReportesMensuales,
             RegistroPlanActividades registroPlanAct, SolicitudProyecto solicitudProyecto) {
         this.idSeguimiento = idSeguimiento;
         this.calificacion = calificacion;
+        this.estado = estado;
         this.horasAcumuladas = horasAcumuladas;
         this.listaDocumentos = listaDocumentos;
         this.listaReportesMensuales = listaReportesMensuales;
@@ -51,6 +53,16 @@ public class Seguimiento {
     public void setCalificacion(double calificacion) {
         this.calificacion = calificacion;
     }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
+    
 
     public int getHorasAcumuladas() {
         return horasAcumuladas;

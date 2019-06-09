@@ -9,11 +9,10 @@
 .tablaAlumnos {
     .table-view {
         -fx-base: #1d1d1d;
-        -fx-control-inner-background: #0055A3;
         -fx-background-color: white;
         -fx-table-cell-border-color: transparent;
         -fx-table-header-border-color: transparent;
-        -fx-padding: 5;
+        -fx-padding: 10;
     }
     .table-view .column-header-background {
         -fx-background-color: transparent;

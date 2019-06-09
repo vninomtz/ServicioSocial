@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 public class Inscripcion {
     private int folioInscripcion;
     private String tipoInscripcion;
-    private LocalDate fechaInscripcion;
+    private Date fechaInscripcion;
     private Estudiante estudiante = new Estudiante();
     private ServicioSocial servicioSocial = new ServicioSocial();
     private Seguimiento seguimiento = new Seguimiento();
@@ -22,7 +23,9 @@ public class Inscripcion {
     public Inscripcion() {
     }
 
-    public Inscripcion(int folioInscripcion, String tipoInscripcion, LocalDate fechaInscripcion, Estudiante estudiante, ServicioSocial servicioSocial, Seguimiento seguimiento) {
+    public Inscripcion(int folioInscripcion, String tipoInscripcion, 
+            Date fechaInscripcion, Estudiante estudiante, 
+            ServicioSocial servicioSocial, Seguimiento seguimiento) {
         this.folioInscripcion = folioInscripcion;
         this.tipoInscripcion = tipoInscripcion;
         this.fechaInscripcion = fechaInscripcion;
@@ -47,11 +50,11 @@ public class Inscripcion {
         this.tipoInscripcion = tipoInscripcion;
     }
 
-    public LocalDate getFechaInscripcion() {
+    public Date getFechaInscripcion() {
         return fechaInscripcion;
     }
 
-    public void setFechaInscripcion(LocalDate fechaInscripcion) {
+    public void setFechaInscripcion(Date fechaInscripcion) {
         this.fechaInscripcion = fechaInscripcion;
     }
 
