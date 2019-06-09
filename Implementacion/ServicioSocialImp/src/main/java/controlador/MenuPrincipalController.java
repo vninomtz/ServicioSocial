@@ -59,6 +59,7 @@ public class MenuPrincipalController implements Initializable {
 
     private List<Inscripcion> listaInscripciones;
 
+    
     private void llenarTablaEstudiantes() {
         InscripcionImp inscripcionImp = new InscripcionImp();
         listaInscripciones = inscripcionImp.getInscripciones();
@@ -106,6 +107,8 @@ public class MenuPrincipalController implements Initializable {
         tablaEstudiantes.setItems(observableList);
         
     }
+    
+    
 
     
     @Override
