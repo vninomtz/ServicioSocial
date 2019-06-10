@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="434.0" prefWidth="532.0" style="-fx-background-color: #FFFFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.AgregarDocumentoController">
+   <children>
+      <AnchorPane layoutX="64.0" layoutY="4.0" prefHeight="95.0" prefWidth="570.0" style="-fx-background-color: #dee6f2;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="64.0" fitWidth="65.0" layoutX="86.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/addDocumento.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="182.0" layoutY="32.0" text="Nuevo Documento">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Separator layoutY="96.0" prefHeight="0.0" prefWidth="519.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <JFXTextArea fx:id="txtDescripcion" labelFloat="true" layoutX="14.0" layoutY="208.0" prefHeight="52.0" prefWidth="225.0" promptText="Descripción" />
+      <JFXDatePicker fx:id="txtFecha" editable="false" layoutX="282.0" layoutY="127.0" prefHeight="28.0" prefWidth="203.0" promptText="Fecha de Ingreso" />
+      <JFXComboBox fx:id="cbTipoDoc" labelFloat="true" layoutX="14.0" layoutY="129.0" prefHeight="25.0" prefWidth="225.0" promptText="Tipo de Documento" />
+      <JFXButton fx:id="btnSubirDoc" buttonType="RAISED" layoutX="282.0" layoutY="241.0" onAction="#clicBtnSubirDocumento" prefHeight="25.0" prefWidth="190.0" style="-fx-background-color: #009688;" text="Subir Documento" textAlignment="CENTER" textFill="#0d0d0d">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="btnCancelar" buttonType="RAISED" layoutX="425.0" layoutY="388.0" onAction="#clicBtnCancelar" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #dee6f2;" text="Cancelar" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnGuardar" buttonType="RAISED" layoutX="282.0" layoutY="388.0" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: #0055A3;" text="Guardar" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="14.0" layoutY="282.0" text="Documento Adjunto">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lbArchivoAdjunto" layoutX="14.0" layoutY="309.0" prefHeight="17.0" prefWidth="172.0" text=" " textFill="#0055a3" />
+   </children>
+</AnchorPane>

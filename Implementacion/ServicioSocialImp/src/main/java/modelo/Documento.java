@@ -5,15 +5,17 @@
  */
 package modelo;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 /**
  *
  * @author Vik-t
  */
 public class Documento {
+    private int idDocumento;
     private String descripcion;
-    private LocalDate fecha;
+    private Date fecha;
+    private String estado;
     private String link;
     private String tipo;
     private int idSeguimiento;
@@ -21,14 +23,25 @@ public class Documento {
     public Documento() {
     }
 
-    public Documento(String descripcion, LocalDate fecha, String link, String tipo, int idSeguimiento) {
+    public Documento(int idDocumento,String descripcion, Date fecha, String estado,
+            String link, String tipo, int idSeguimiento) {
+        this.idDocumento = idDocumento;
         this.descripcion = descripcion;
         this.fecha = fecha;
+        this.estado = estado;
         this.link = link;
         this.tipo = tipo;
         this.idSeguimiento = idSeguimiento;
     }
 
+    public int getIdDocumento() {
+        return idDocumento;
+    }
+
+    public void setIdDocumento(int idDocumento) {
+        this.idDocumento = idDocumento;
+    }
+    
     public String getDescripcion() {
         return descripcion;
     }
@@ -37,13 +50,22 @@ public class Documento {
         this.descripcion = descripcion;
     }
 
-    public LocalDate getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
 
     public String getLink() {
         return link;

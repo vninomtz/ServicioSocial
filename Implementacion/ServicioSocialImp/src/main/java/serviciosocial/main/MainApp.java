@@ -19,6 +19,7 @@ public class MainApp extends Application {
         stage.setTitle("Servicio Social - Inicio Sesion");
         stage.getIcons().add(new Image("/fxml/img/User1.png"));
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

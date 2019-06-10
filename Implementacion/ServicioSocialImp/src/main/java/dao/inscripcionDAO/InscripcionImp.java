@@ -26,6 +26,9 @@ public class InscripcionImp implements IInscripcion{
         List<Inscripcion> listaInscripciones = new ArrayList();
         Connection conexionBD = new ConexionBD().getConexionBD();
         String sQuery = "SELECT * from estudiante_detalles;";
+        if(conexionBD == null) {
+            return null;
+        }
 
         System.out.println(sQuery);
         try {
@@ -71,6 +74,7 @@ public class InscripcionImp implements IInscripcion{
             alert.setHeaderText("Hubo un error con la conexión a la Base de Datos,"
                     + "por favor intente más tarde");
             alert.showAndWait();
+            return null;
         } finally {
             /*try {
                 conexionBD.close();

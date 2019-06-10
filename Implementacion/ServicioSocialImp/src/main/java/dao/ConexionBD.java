@@ -37,6 +37,7 @@ public class ConexionBD {
                 alert.setHeaderText("Hubo un error con la conexión a la Base de Datos,"
                         + "por favor intente más tarde");
                 alert.showAndWait();
+                conexion = null;
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             System.out.println("Error en la instancia del controlador: " + ex.getMessage());

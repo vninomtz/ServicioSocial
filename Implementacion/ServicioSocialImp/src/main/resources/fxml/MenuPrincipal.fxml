@@ -29,7 +29,7 @@
                   <Image url="@img/LIS_Logo.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="btnVerDocumentos" layoutY="168.0" prefHeight="45.0" prefWidth="200.0" stylesheets="@../styles/Styles.css" text="Ver Documentos" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <JFXButton fx:id="btnVerDocumentos" layoutY="168.0" onAction="#clicBtVerDocumentos" prefHeight="45.0" prefWidth="200.0" stylesheets="@../styles/Styles.css" text="Ver Documentos" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></JFXButton>
