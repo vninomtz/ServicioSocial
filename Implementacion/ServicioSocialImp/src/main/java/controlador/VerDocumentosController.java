@@ -7,11 +7,15 @@ package controlador;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import dao.DocumentosDAO.DocumentosImp;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,9 +24,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import modelo.Documento;
 import modelo.Inscripcion;
 import serviciosocial.main.MainApp;
 
@@ -33,10 +40,10 @@ import serviciosocial.main.MainApp;
  */
 public class VerDocumentosController implements Initializable {
 
-    @FXML private TableView<Inscripcion> tablaEstudiantes; 
-    @FXML private TableColumn<Inscripcion, String> colTipoDoc;
-    @FXML private TableColumn<?, ?> colEstadoDoc;
-    @FXML private TableColumn<?, ?> colFechaDoc;
+    @FXML private TableView<Documento> tablaDocumentos; 
+    @FXML private TableColumn<Documento, String> colTipoDoc;
+    @FXML private TableColumn<Documento, String> colEstadoDoc;
+    @FXML private TableColumn<Documento, String> colFechaDoc;
     @FXML private JFXButton btnAgregarDocumento;
     @FXML private JFXButton btnValidarDocumento;
     @FXML private JFXButton btnRegresar;
@@ -48,15 +55,15 @@ public class VerDocumentosController implements Initializable {
     @FXML private JFXComboBox<?> cbTipoDoc;
     @FXML private Label lbMatricula;
     @FXML private Label lbEstudiante;
-    private Inscripcion inscripcion;
+    private Inscripcion inscripcionEstudiante;
 
     public void setInscripcion(Inscripcion inscripcion) {
-        this.inscripcion = inscripcion;
-        lbMatricula.setText(inscripcion.getEstudiante().getMatricula());
-        lbEstudiante.setText(inscripcion.getEstudiante().toString());
+        this.inscripcionEstudiante = inscripcion;
+        lbMatricula.setText(inscripcionEstudiante.getEstudiante().getMatricula());
+        lbEstudiante.setText(inscripcionEstudiante.getEstudiante().toString());
+        llenarTablaDocumentos();
         
-    }
-    
+    } 
     @FXML 
     private void ventanaMenuPrincipal() {
         FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/MenuPrincipal.fxml"));
@@ -77,9 +84,45 @@ public class VerDocumentosController implements Initializable {
         }
     }
     
+    @FXML
+    private void ventanaAgregarDocuemnto() {
+        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/AgregarDocumento.fxml"));
+        try {
+            AnchorPane anchorpane = loader.load();
+            Scene scene = new Scene(anchorpane);
+            Stage stage = new Stage();
+            stage.setTitle("Agregar Documento");
+            stage.getIcons().add(new Image("/fxml/img/addDocumento.png"));
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.alwaysOnTopProperty();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(VerDocumentosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void llenarTablaDocumentos() {
+        DocumentosImp documentoimp = new DocumentosImp();
+        //List<Documento> listadoc = documentoimp.getDocumentos(inscripcionEstudiante.getSeguimiento().getIdSeguimiento());
+        inscripcionEstudiante.getSeguimiento().setListaDocumentos
+        (documentoimp.getDocumentos
+        (inscripcionEstudiante.getSeguimiento().getIdSeguimiento()));
+        colTipoDoc.setCellValueFactory(new PropertyValueFactory("tipo"));
+        colEstadoDoc.setCellValueFactory(new PropertyValueFactory("estado"));        
+        colFechaDoc.setCellValueFactory(new PropertyValueFactory("fecha"));    
+        
+        ObservableList<Documento> observableList = FXCollections.observableArrayList
+        (inscripcionEstudiante.getSeguimiento().getListaDocumentos());
+        
+        tablaDocumentos.setItems(observableList);
+        
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
     
 }

@@ -16,7 +16,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #FFFFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.VerDocumentosController">
    <children>
-      <TableView fx:id="tablaEstudiantes" layoutX="366.0" layoutY="86.0" prefHeight="305.0" prefWidth="469.0" styleClass="tablaAlumnos" stylesheets="@../styles/Styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+      <TableView fx:id="tablaDocumentos" layoutX="366.0" layoutY="86.0" prefHeight="305.0" prefWidth="469.0" styleClass="tablaAlumnos" stylesheets="@../styles/Styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
         <columns>
           <TableColumn fx:id="colTipoDoc" prefWidth="148.0" text="Tipo" />
           <TableColumn fx:id="colEstadoDoc" prefWidth="140.0" text="Estado" />
@@ -30,7 +30,7 @@
                   <Image url="@img/LIS_Logo.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="btnAgregarDocumento" layoutY="168.0" prefHeight="45.0" prefWidth="200.0" stylesheets="@../styles/Styles.css" text="Agregar Documento" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <JFXButton fx:id="btnAgregarDocumento" layoutY="168.0" onAction="#ventanaAgregarDocuemnto" prefHeight="45.0" prefWidth="200.0" stylesheets="@../styles/Styles.css" text="Agregar Documento" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></JFXButton>
@@ -73,19 +73,19 @@
       <Separator layoutY="31.0" prefHeight="0.0" prefWidth="682.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <JFXComboBox fx:id="cbEstadoDoc" layoutX="627.0" layoutY="40.0" prefHeight="25.0" prefWidth="147.0" promptText="Estado " />
       <JFXComboBox fx:id="cbTipoDoc" layoutX="627.0" layoutY="73.0" prefHeight="25.0" prefWidth="147.0" promptText="Tipo " />
-      <Label layoutX="250.0" layoutY="55.0" text="Estudiante: ">
+      <Label layoutX="250.0" layoutY="61.0" text="Estudiante: ">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="251.0" layoutY="35.0" text="Matrícula:">
+      <Label layoutX="251.0" layoutY="41.0" text="Matrícula:">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="lbMatricula" layoutX="322.0" layoutY="36.0" prefHeight="17.0" prefWidth="133.0" text="Label" />
-      <Label fx:id="lbEstudiante" layoutX="322.0" layoutY="56.0" prefHeight="17.0" prefWidth="200.0" text="Label" />
-      <ImageView fitHeight="45.0" fitWidth="54.0" layoutX="200.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="lbMatricula" layoutX="322.0" layoutY="42.0" prefHeight="17.0" prefWidth="133.0" text="Label" />
+      <Label fx:id="lbEstudiante" layoutX="322.0" layoutY="62.0" prefHeight="17.0" prefWidth="200.0" text="Label" />
+      <ImageView fitHeight="45.0" fitWidth="54.0" layoutX="200.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/estudiante.png" />
          </image>
