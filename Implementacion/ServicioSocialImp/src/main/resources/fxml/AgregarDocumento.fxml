@@ -28,10 +28,10 @@
          </children>
       </AnchorPane>
       <Separator layoutY="96.0" prefHeight="0.0" prefWidth="519.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <JFXTextArea fx:id="txtDescripcion" labelFloat="true" layoutX="14.0" layoutY="189.0" prefHeight="71.0" prefWidth="225.0" promptText="Descripción" />
-      <JFXDatePicker fx:id="txtFecha" layoutX="282.0" layoutY="127.0" prefHeight="28.0" prefWidth="203.0" promptText="Fecha de Ingreso" />
+      <JFXTextArea fx:id="txtDescripcion" labelFloat="true" layoutX="14.0" layoutY="208.0" prefHeight="52.0" prefWidth="225.0" promptText="Descripción" />
+      <JFXDatePicker fx:id="txtFecha" editable="false" layoutX="282.0" layoutY="127.0" prefHeight="28.0" prefWidth="203.0" promptText="Fecha de Ingreso" />
       <JFXComboBox fx:id="cbTipoDoc" labelFloat="true" layoutX="14.0" layoutY="129.0" prefHeight="25.0" prefWidth="225.0" promptText="Tipo de Documento" />
-      <JFXButton fx:id="btnSubirDoc" buttonType="RAISED" layoutX="282.0" layoutY="235.0" prefHeight="25.0" prefWidth="190.0" style="-fx-background-color: #009688;" text="Subir Documento" textAlignment="CENTER" textFill="#0d0d0d">
+      <JFXButton fx:id="btnSubirDoc" buttonType="RAISED" layoutX="282.0" layoutY="241.0" onAction="#clicBtnSubirDocumento" prefHeight="25.0" prefWidth="190.0" style="-fx-background-color: #009688;" text="Subir Documento" textAlignment="CENTER" textFill="#0d0d0d">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></JFXButton>
@@ -49,6 +49,6 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Label fx:id="lbArchivoAdjunto" layoutX="14.0" layoutY="309.0" prefHeight="17.0" prefWidth="172.0" text="Docmuento1.pdf" textFill="#0055a3" />
+      <Label fx:id="lbArchivoAdjunto" layoutX="14.0" layoutY="309.0" prefHeight="17.0" prefWidth="172.0" text=" " textFill="#0055a3" />
    </children>
 </AnchorPane>

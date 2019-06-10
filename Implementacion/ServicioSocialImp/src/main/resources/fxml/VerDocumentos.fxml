@@ -30,7 +30,7 @@
                   <Image url="@img/LIS_Logo.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="btnAgregarDocumento" layoutY="168.0" onAction="#ventanaAgregarDocuemnto" prefHeight="45.0" prefWidth="200.0" stylesheets="@../styles/Styles.css" text="Agregar Documento" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <JFXButton fx:id="btnAgregarDocumento" layoutY="168.0" onAction="#ventanaAgregarDocumento" prefHeight="45.0" prefWidth="200.0" stylesheets="@../styles/Styles.css" text="Agregar Documento" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></JFXButton>

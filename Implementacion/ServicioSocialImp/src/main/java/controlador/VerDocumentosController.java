@@ -85,7 +85,7 @@ public class VerDocumentosController implements Initializable {
     }
     
     @FXML
-    private void ventanaAgregarDocuemnto() {
+    private void ventanaAgregarDocumento() {
         FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/AgregarDocumento.fxml"));
         try {
             AnchorPane anchorpane = loader.load();
@@ -93,6 +93,8 @@ public class VerDocumentosController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Agregar Documento");
             stage.getIcons().add(new Image("/fxml/img/addDocumento.png"));
+            AgregarDocumentoController controller = (AgregarDocumentoController) loader.getController();
+            controller.setInscripcion(inscripcionEstudiante);
             stage.setScene(scene);
             stage.setResizable(false);
             stage.alwaysOnTopProperty();
