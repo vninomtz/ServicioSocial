@@ -15,5 +15,6 @@
       <JFXButton fx:id="btCargarReporte" layoutX="291.0" layoutY="94.0" onAction="#clicBtCargar" prefHeight="27.0" prefWidth="121.0" style="-fx-background-color: #0055A3 #0055A3;" text="Cargar Reporte" textFill="WHITE" />
       <JFXButton fx:id="btSalir" layoutX="106.0" layoutY="161.0" prefHeight="27.0" prefWidth="80.0" style="-fx-background-color: #0055A3 #0055A3;" text="Salir" textFill="WHITE" />
       <JFXButton fx:id="btGuardar" layoutX="292.0" layoutY="161.0" onAction="#clicBtGuardar" prefHeight="27.0" prefWidth="80.0" style="-fx-background-color: #0055A3 #0055A3;" text="Guardar" textFill="WHITE" />
+      <JFXComboBox fx:id="cbxHoras" layoutX="158.0" layoutY="94.0" />
    </children>
 </AnchorPane>

@@ -7,11 +7,25 @@ package controlador;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import dao.reportemensualDAO.ReporteMensualImp;
+import java.awt.Desktop;
+import static java.awt.SystemColor.desktop;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.HostServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,6 +38,7 @@ import javafx.stage.Stage;
 import javax.swing.JFileChooser;
 import modelo.Estudiante;
 import modelo.Inscripcion;
+import modelo.ReporteMensual;
 
 /**
  * FXML Controller class
@@ -44,6 +59,8 @@ public class AgregarReporteController implements Initializable {
     private JFXButton btSalir;
     @FXML
     private JFXButton btGuardar;
+    
+    ReporteMensual reporte = new ReporteMensual();
 
     public void setInscripcion(Inscripcion inscripcion) {
         this.inscripcion = inscripcion;
@@ -87,24 +104,31 @@ public class AgregarReporteController implements Initializable {
     }
 
     @FXML
-    private void clicBtCargar() {
+    private void clicBtCargar() throws FileNotFoundException, IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         Stage stage = new Stage();
-        fileChooser.showOpenDialog(stage);
+        File archivo = fileChooser.showOpenDialog(stage);
+        if (archivo != null) {
+            archivo.getName();
+                
+                
+
+        }
+
     }
 
     @FXML
     private void clicBtGuardar() {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirmación");
-        alert.setHeaderText("Registro de Reporte Numero: " + (String) cbxNumeroReporte.getValue() + " del Estudiante: " +
-                inscripcion.getEstudiante().getNombre() + " " + inscripcion.getEstudiante().getPaterno());
+        alert.setHeaderText("Registro de Reporte Numero: " + (String) cbxNumeroReporte.getValue() + " del Estudiante: "
+                + inscripcion.getEstudiante().getNombre() + " " + inscripcion.getEstudiante().getPaterno());
         alert.setContentText("Confirme la operación");
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            // ... user chose OK
+            //reporte.setHorasReportadas(cbxHora);
         } else {
             // ... user chose CANCEL or closed the dialog
         }

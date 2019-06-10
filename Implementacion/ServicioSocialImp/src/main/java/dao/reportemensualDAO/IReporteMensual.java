@@ -14,4 +14,10 @@ import modelo.ReporteMensual;
  */
 public interface IReporteMensual {
     public List<ReporteMensual> getReportes(int idSeguimiento); 
+    public boolean cambiarEstado(String nuevoEstado,int idReporte);
+    public boolean guardarReporte(ReporteMensual reporte);
+        
+    
+        
+    
 }
