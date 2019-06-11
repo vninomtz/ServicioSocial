@@ -111,7 +111,7 @@ public class AgregarReporteController implements Initializable {
 
     public File guardarDocumento() {
         Path origen = Paths.get(archivo.getAbsolutePath());
-        Path destino = Paths.get("src\\main\\resources\\fxml\\documentos\\" + archivo.getName());
+        Path destino = Paths.get("src\\main\\resources\\fxml\\reportesmensuales\\" + archivo.getName());
         try {
             Files.copy(origen, destino, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
