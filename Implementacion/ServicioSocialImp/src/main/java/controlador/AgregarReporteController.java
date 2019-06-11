@@ -134,6 +134,7 @@ public class AgregarReporteController implements Initializable {
     }
 
     public void guardarReporte() {
+        File copiaArchivo = guardarDocumento();
         int horas = Integer.parseInt(txtHoras.getText());
         String numeroReporte = txtNumeroReporte.getText();
         String mes = (String) cbxMes.getValue();
@@ -142,10 +143,15 @@ public class AgregarReporteController implements Initializable {
         reporte.setNumeroReporte(Integer.parseInt(numeroReporte));
         reporte.setIdSeguimiento(inscripcion.getSeguimiento().getIdSeguimiento());
         reporte.setHorasReportadas(horas);
-        reporte.setLink(archivo.getAbsolutePath());
+        reporte.setLink(copiaArchivo.getPath());
         reporte.setMes(mes);
         ReporteMensualImp reporteImp = new ReporteMensualImp();
-        reporteImp.guardarReporte(reporte);
+        if(reporteImp.guardarReporte(reporte)){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Exito");
+            alert.setHeaderText("El reporte se ha guardado exitosamente");
+            alert.showAndWait();
+        }
 
     }
     

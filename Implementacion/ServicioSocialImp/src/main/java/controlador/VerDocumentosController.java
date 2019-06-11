@@ -7,7 +7,7 @@ package controlador;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import dao.DocumentosDAO.DocumentosImp;
+import dao.documentosDAO.DocumentosImp;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;

@@ -13,7 +13,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
-import dao.DocumentosDAO.DocumentosImp;
+import dao.documentosDAO.DocumentosImp;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -90,7 +90,6 @@ public class AgregarDocumentoController implements Initializable {
     private void llenarCbTipoDocumento() {
          List<String> listaMes = new ArrayList();
         listaMes.add("Registro y plan de Actividades");
-        listaMes.add("Reporte Mensual de Actividades");
         listaMes.add("Carta Aceptación");
         listaMes.add("Carta Liberación");
         listaMes.add("Horario");

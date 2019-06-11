@@ -107,8 +107,11 @@ public class ReporteMensualImp implements IReporteMensual {
     }
 
     @Override
-    public int obtenerUltimoReporte() {
-        String query = "select noReporte from reportemensual order by noReporte desc limit 1";
+    public int obtenerUltimoReporte(int idseguimiento) {
+        String query = "select noReporte from reportemensual "
+                + "where idseguimiento =" + idseguimiento
+                + " order by noReporte desc limit 1 ;";
+        
         Connection conexionBD = new ConexionBD().getConexionBD();
         int numero = 0;
         try {
