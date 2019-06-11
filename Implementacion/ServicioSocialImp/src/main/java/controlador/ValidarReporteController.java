@@ -63,9 +63,9 @@ public class ValidarReporteController implements Initializable {
         txtMes.setText(reporte.getMes());
         txthoras.setText(Integer.toString(reporte.getHorasReportadas()));
 
-        txtNumeroReporte.setDisable(true);
-        txtMes.setDisable(true);
-        txthoras.setDisable(true);
+        txtNumeroReporte.setEditable(false);
+        txtMes.setEditable(false);
+        txthoras.setEditable(false);
 
     }
 

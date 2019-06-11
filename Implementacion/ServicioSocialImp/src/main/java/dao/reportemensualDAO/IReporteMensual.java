@@ -13,11 +13,13 @@ import modelo.ReporteMensual;
  * @author alanglezh
  */
 public interface IReporteMensual {
-    public List<ReporteMensual> getReportes(int idSeguimiento); 
-    public boolean cambiarEstado(String nuevoEstado,int idReporte);
+
+    public List<ReporteMensual> getReportes(int idSeguimiento);
+
+    public boolean cambiarEstado(String nuevoEstado, int idReporte);
+
     public boolean guardarReporte(ReporteMensual reporte);
-        
-    
-        
-    
+
+    public int obtenerUltimoReporte();
+
 }

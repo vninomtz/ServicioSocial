@@ -7,6 +7,7 @@ package controlador;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import dao.reportemensualDAO.ReporteMensualImp;
 import java.awt.Desktop;
 import static java.awt.SystemColor.desktop;
@@ -33,6 +34,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.swing.JFileChooser;
@@ -50,7 +52,7 @@ public class AgregarReporteController implements Initializable {
     private Inscripcion inscripcion;
 
     @FXML
-    private JFXComboBox cbxNumeroReporte;
+    private JFXTextField txtNumeroReporte;
     @FXML
     private JFXComboBox cbxMes;
     @FXML
@@ -59,8 +61,19 @@ public class AgregarReporteController implements Initializable {
     private JFXButton btSalir;
     @FXML
     private JFXButton btGuardar;
-    
-    ReporteMensual reporte = new ReporteMensual();
+    @FXML
+    private Label lbArchivoAdjunto;
+    @FXML
+    private JFXTextField txtHoras;
+          
+
+    int numeroUltimoReporte;
+
+    public void setReporte(int numeroReporte) {
+        this.numeroUltimoReporte = numeroReporte;
+        llenarCbxNumeroReporte();
+
+    }
 
     public void setInscripcion(Inscripcion inscripcion) {
         this.inscripcion = inscripcion;
@@ -77,7 +90,7 @@ public class AgregarReporteController implements Initializable {
         listaMes.add("Julio");
         listaMes.add("Agosto");
         listaMes.add("Septiembre");
-        listaMes.add("Octubre");
+        listaMes.add("Ocutbre");
         listaMes.add("Noviembre");
         listaMes.add("Diciembre");
 
@@ -87,48 +100,56 @@ public class AgregarReporteController implements Initializable {
     }
 
     private void llenarCbxNumeroReporte() {
-        List<String> listaNumeroReporte = new ArrayList();
-        listaNumeroReporte.add("1");
-        listaNumeroReporte.add("2");
-        listaNumeroReporte.add("3");
-        listaNumeroReporte.add("4");
-        listaNumeroReporte.add("5");
-        listaNumeroReporte.add("6");
-        listaNumeroReporte.add("7");
-        listaNumeroReporte.add("8");
-        listaNumeroReporte.add("9");
-        listaNumeroReporte.add("10");
-        ObservableList<String> obsevableListaTipoOpe
-                = FXCollections.observableArrayList(listaNumeroReporte);
-        cbxNumeroReporte.setItems(obsevableListaTipoOpe);
-    }
+        txtNumeroReporte.setText(Integer.toString(numeroUltimoReporte + 1));
+        txtNumeroReporte.setEditable(false);
 
+    }
+ File archivo;
     @FXML
     private void clicBtCargar() throws FileNotFoundException, IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         Stage stage = new Stage();
-        File archivo = fileChooser.showOpenDialog(stage);
+         archivo = fileChooser.showOpenDialog(stage);
         if (archivo != null) {
-            archivo.getName();
-                
-                
-
+            lbArchivoAdjunto.setText(archivo.getName());
+            
         }
 
     }
 
+    
+    
+    public void guardarReporte(){
+        int horas =  Integer.parseInt(txtHoras.getText());
+        String numeroReporte = txtNumeroReporte.getText();
+        String mes = (String) cbxMes.getValue();
+        
+        ReporteMensual reporte = new ReporteMensual();
+        reporte.setNumeroReporte(Integer.parseInt(numeroReporte));
+        reporte.setIdSeguimiento(inscripcion.getSeguimiento().getIdSeguimiento());
+        reporte.setHorasReportadas(horas);
+        reporte.setLink(archivo.getAbsolutePath());
+        reporte.setMes(mes);
+        ReporteMensualImp reporteImp = new ReporteMensualImp();
+        reporteImp.guardarReporte(reporte);
+ 
+    }
+
     @FXML
     private void clicBtGuardar() {
+
+        
+
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirmación");
-        alert.setHeaderText("Registro de Reporte Numero: " + (String) cbxNumeroReporte.getValue() + " del Estudiante: "
+        alert.setHeaderText("Registro de Reporte Numero: " + (String) Integer.toString(numeroUltimoReporte + 1) + " del Estudiante: "
                 + inscripcion.getEstudiante().getNombre() + " " + inscripcion.getEstudiante().getPaterno());
         alert.setContentText("Confirme la operación");
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
-            //reporte.setHorasReportadas(cbxHora);
+            guardarReporte();
         } else {
             // ... user chose CANCEL or closed the dialog
         }
@@ -139,7 +160,7 @@ public class AgregarReporteController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        llenarCbxNumeroReporte();
+
         llenarCbMes();
 
     }

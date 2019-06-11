@@ -143,6 +143,13 @@ public class VerReportesController implements Initializable {
             alert.showAndWait();
         }
     }
+    
+    private int obtenerUltimoReporte(){
+        ReporteMensualImp reporteImp = new ReporteMensualImp();
+        int numero = reporteImp.obtenerUltimoReporte();
+        System.out.println("Numero: " + numero);
+        return numero;
+    }
 
     @FXML
     private void clicBtAgregarReporte() {
@@ -158,6 +165,7 @@ public class VerReportesController implements Initializable {
             stage.setResizable(false);
             AgregarReporteController controller = (AgregarReporteController) loader.getController();
             controller.setInscripcion(inscripcion);
+            controller.setReporte(obtenerUltimoReporte());
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
 
