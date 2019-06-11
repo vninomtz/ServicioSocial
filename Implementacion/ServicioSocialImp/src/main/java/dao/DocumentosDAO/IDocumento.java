@@ -14,4 +14,5 @@ import modelo.Documento;
  */
 public interface IDocumento {
     public List<Documento> getDocumentos(int idSeguimiento);
+    public boolean guardarDocumento(Documento documento);
 }

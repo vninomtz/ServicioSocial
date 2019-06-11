@@ -10,8 +10,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
+import javafx.scene.control.Alert;
 import modelo.Documento;
 
 /**
@@ -47,11 +50,11 @@ public class DocumentosImp implements IDocumento{
             }
         } catch (SQLException ex) {
             System.out.println("Error en la creacion de el Statement: " + ex.getMessage());
-            /*Alert alert = new Alert(Alert.AlertType.WARNING);
+            Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Error con BD");
             alert.setHeaderText("Hubo un error con la conexión a la Base de Datos,"
                     + "por favor intente más tarde");
-            alert.showAndWait();*/
+            alert.showAndWait();
             return null;
         } finally {
             /*try {
@@ -61,6 +64,53 @@ public class DocumentosImp implements IDocumento{
             }*/
         }
         return listaDocumentos;
+    }
+
+    @Override
+    public boolean guardarDocumento(Documento documento) {
+        System.out.println("Entro");
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        String fecha = formato.format(documento.getFecha());
+        String rutaOriginal = documento.getLink();
+        String separador = Pattern.quote("\\");
+        String[] rutaPartida = rutaOriginal.split(separador);
+        String nuevaRuta = "";
+        for(String ruta : rutaPartida) {
+            nuevaRuta += ruta + "\\\\";
+        }
+        String rutaFinal = nuevaRuta.substring(0, nuevaRuta.length() - 2);
+        
+        
+        String sentencia = "INSERT INTO documento(descripcion_documento,"
+                + "estado_documento,fecha_documento,link_documento,tipo_documento,idseguimiento) "
+                + "VALUES ('" + documento.getDescripcion() + "','" 
+                + documento.getEstado() + "','"
+                + fecha + "','"
+                + rutaFinal + "','"
+                + documento.getTipo() + "','"
+                + documento.getIdSeguimiento() + "');";
+        System.out.println(sentencia);
+        Connection conexionBD = new ConexionBD().getConexionBD();
+        if(conexionBD == null) {
+            return false;
+        }
+        try {
+            Statement statement = conexionBD.createStatement();
+            int rs = statement.executeUpdate(sentencia);
+            if (rs == 1 || rs == 2 || rs == 0) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error en la creacion de el Statement" + ex.getMessage());
+            return false;
+        } finally {
+            /*try {
+                conexionBD.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexion" + ex.getMessage());
+            }*/
+        }
+        return false;
     }
     
 }

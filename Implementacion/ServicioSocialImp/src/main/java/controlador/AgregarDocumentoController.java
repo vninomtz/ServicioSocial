@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
+import dao.DocumentosDAO.DocumentosImp;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,7 +29,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -42,6 +45,7 @@ import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
+import modelo.Documento;
 import modelo.Inscripcion;
 
 /**
@@ -110,8 +114,7 @@ public class AgregarDocumentoController implements Initializable {
     
     public File guardarDocumento(){
         Path origen = Paths.get(archivo.getAbsolutePath());
-        JOptionPane.showMessageDialog(null,"metodo: "+  archivo.getPath());
-        Path destino = Paths.get("src/main/resources/fxml/documentos/" + archivo.getName());
+        Path destino = Paths.get("src\\main\\resources\\fxml\\documentos\\" + archivo.getName());
         try {
             Files.copy(origen, destino,StandardCopyOption.REPLACE_EXISTING);
         } catch(IOException e) {
@@ -120,23 +123,72 @@ public class AgregarDocumentoController implements Initializable {
         return destino.toFile();
     }
     
+    public Date asDate(LocalDate localDate) {
+    return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+  }
     @FXML
     private void clicBtGuardar() {
-       if(archivo != null) {
+       if(validarCampos()) {
            File copiaArchivo = guardarDocumento();
            if(copiaArchivo != null) {
-               
+               Documento documento = new Documento();
+               documento.setTipo(cbTipoDoc.getSelectionModel().getSelectedItem());
+               documento.setDescripcion(txtDescripcion.getText());
+               documento.setEstado("Pendiente");
+               documento.setIdSeguimiento(inscripcion.getSeguimiento().getIdSeguimiento());
+               documento.setLink(copiaArchivo.getPath());
+               documento.setFecha(asDate(txtFecha.getValue()));
+               DocumentosImp documentoimp = new DocumentosImp();
+               if(documentoimp.guardarDocumento(documento)) {
+                   Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Exito");
+                    alert.setHeaderText("El documento se ha guardado exitosamente");
+                    alert.showAndWait();
+                    Stage ventana = (Stage)btnCancelar.getScene().getWindow();
+                    ventana.close();
+               } else {
+                   Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Error en BD");
+                    alert.setHeaderText("Hubo un error en la conexion a la Base de Datos,"
+                            + "no se pudo guardar el documento, intente más tarde");
+                    alert.showAndWait();
+               }
            }else {
                System.out.println("Error al copiar el archivo, no se pudo realizar el guardoado");
-               
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error al Guardar Documento");
+                alert.setHeaderText("Hubo un error al guardar el documento,"
+                        + "Intente más tarde");
+                alert.showAndWait();
            }
-       }else {
-           Alert alert = new Alert(Alert.AlertType.WARNING);
-           alert.setTitle("Advertencia");
-           alert.setHeaderText("Agregue un documento antes de guardar");
-           alert.showAndWait();
        }
        
+    }
+    
+    public boolean validarCampos() {
+        if(cbTipoDoc.getValue() == null) {
+           Alert alert = new Alert(Alert.AlertType.INFORMATION);
+           alert.setTitle("Campos Vacíos");
+           alert.setHeaderText("Seleccionar el tipo de documento antes de guardar");
+           alert.showAndWait();
+           return false;
+        }
+        if(txtDescripcion.getText().isEmpty()) {
+           Alert alert = new Alert(Alert.AlertType.INFORMATION);
+           alert.setTitle("Campos Vacíos");
+           alert.setHeaderText("Ingresar la descripcion del documento antes de guardar");
+           alert.showAndWait();
+           return false;
+        }
+        if(archivo == null) {
+           Alert alert = new Alert(Alert.AlertType.INFORMATION);
+           alert.setTitle("Campos Vacíos");
+           alert.setHeaderText("Ingresar el documento antes de guardar");
+           alert.showAndWait();
+           return false;
+        }
+        
+        return true;
     }
     
     @Override

@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,6 +30,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import modelo.Documento;
 import modelo.Inscripcion;
 import serviciosocial.main.MainApp;
@@ -99,6 +101,12 @@ public class VerDocumentosController implements Initializable {
             stage.setResizable(false);
             stage.alwaysOnTopProperty();
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setOnHidden(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    llenarTablaDocumentos();
+                }
+            });
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(VerDocumentosController.class.getName()).log(Level.SEVERE, null, ex);
@@ -119,6 +127,7 @@ public class VerDocumentosController implements Initializable {
         (inscripcionEstudiante.getSeguimiento().getListaDocumentos());
         
         tablaDocumentos.setItems(observableList);
+        
         
     }
     

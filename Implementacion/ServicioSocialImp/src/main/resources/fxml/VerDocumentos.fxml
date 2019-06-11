@@ -18,9 +18,9 @@
    <children>
       <TableView fx:id="tablaDocumentos" layoutX="366.0" layoutY="86.0" prefHeight="305.0" prefWidth="469.0" styleClass="tablaAlumnos" stylesheets="@../styles/Styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
         <columns>
-          <TableColumn fx:id="colTipoDoc" prefWidth="148.0" text="Tipo" />
-          <TableColumn fx:id="colEstadoDoc" prefWidth="140.0" text="Estado" />
-            <TableColumn fx:id="colFechaDoc" prefWidth="154.0" text="Fecha Creación" />
+          <TableColumn fx:id="colTipoDoc" prefWidth="223.0" text="Tipo" />
+          <TableColumn fx:id="colEstadoDoc" prefWidth="185.0" text="Estado" />
+            <TableColumn fx:id="colFechaDoc" prefWidth="148.0" text="Fecha Creación" />
         </columns>
       </TableView>
       <AnchorPane layoutX="14.0" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #dee6f2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="32.0">
