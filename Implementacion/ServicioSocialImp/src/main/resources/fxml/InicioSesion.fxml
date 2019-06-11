@@ -23,7 +23,7 @@
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></JFXTextField>
-            <JFXButton fx:id="btnIniciarSesion" buttonType="RAISED" layoutX="36.0" layoutY="290.0" prefHeight="25.0" prefWidth="211.0" style="-fx-background-color: #029931;" text="Iniciar Sesión" textFill="WHITE">
+            <JFXButton fx:id="btnIniciarSesion" buttonType="RAISED" layoutX="36.0" layoutY="290.0" onAction="#clicBtInciarSesion" prefHeight="25.0" prefWidth="211.0" style="-fx-background-color: #029931;" text="Iniciar Sesión" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

@@ -59,7 +59,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Cuenta">
                <items>
-                  <MenuItem fx:id="mtSalirCuenta" mnemonicParsing="false" text="Salir" />
+                  <MenuItem fx:id="mtSalirCuenta" mnemonicParsing="false" onAction="#clicBtSalirCuenta" text="Salir" />
                </items>
             </Menu>
          </menus>

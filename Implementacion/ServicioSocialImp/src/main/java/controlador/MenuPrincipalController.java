@@ -11,7 +11,9 @@ import dao.inscripcionDAO.InscripcionImp;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import static javafx.application.Platform.exit;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -22,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -66,7 +69,33 @@ public class MenuPrincipalController implements Initializable {
     private List<Inscripcion> listaInscripciones;
     
     
-  
+  @FXML
+  private void clicBtSalirCuenta() {
+      Alert alert = new Alert(AlertType.CONFIRMATION);
+      alert.setTitle("Confirmación");
+      alert.setHeaderText("Salir del sistema");
+      alert.setContentText("¿Estás seguro de que quieres salir?");
+      Optional<ButtonType> result = alert.showAndWait();
+      if(result.get() == ButtonType.OK) {
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/InicioSesion.fxml"));
+                try {
+                    AnchorPane anchorpane = loader.load();
+                    Scene scene = new Scene(anchorpane);
+                    scene.getStylesheets().add("/styles/Styles.css");
+                    Stage stage = new Stage();
+                    stage.setTitle("Servicio Social - Inicio Sesion");
+                    stage.getIcons().add(new Image("/fxml/img/User1.png"));
+                    stage.setScene(scene);
+                    stage.setResizable(false);
+                    stage.show();
+                    Stage principal = (Stage) btnVerDocumentos.getScene().getWindow();
+                    principal.close();
+                } catch (IOException ex) {
+                    System.out.println("Error al mostrar la ventana:" + ex.getMessage());
+                }
+      }
+      
+  }
 
    @FXML
     private void clicBtVerReportes() {
