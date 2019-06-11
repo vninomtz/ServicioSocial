@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.VerReportesController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="732.0" style="-fx-background-color: FFFFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.VerReportesController">
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #dee6f2;">
          <children>
@@ -17,7 +17,7 @@
                   <Image url="@img/LIS_Logo.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="btnValidarReporte" layoutY="168.0" prefHeight="45.0" prefWidth="200.0" stylesheets="@../styles/Styles.css" text="Validar Reporte" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <JFXButton fx:id="btnValidarReporte" layoutY="168.0" onAction="#clicBtValidarReporte" prefHeight="45.0" prefWidth="200.0" stylesheets="@../styles/Styles.css" text="Validar Reporte" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

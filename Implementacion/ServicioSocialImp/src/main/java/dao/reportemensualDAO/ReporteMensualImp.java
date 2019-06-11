@@ -12,6 +12,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.control.Alert;
 import modelo.ReporteMensual;
 
 /**
@@ -22,10 +25,11 @@ public class ReporteMensualImp implements IReporteMensual {
 
     @Override
     public List<ReporteMensual> getReportes(int idSeguimiento) {
+        System.out.println("eeeeeeeee");
         List<ReporteMensual> listaReportes = new ArrayList();
         Connection conexionBD = new ConexionBD().getConexionBD();
         String sQuery = "SELECT * FROM reportemensual where idseguimiento ="
-                +idSeguimiento +";";
+                + idSeguimiento + ";";
 
         System.out.println(sQuery);
         try {
@@ -34,7 +38,7 @@ public class ReporteMensualImp implements IReporteMensual {
             while (rs != null && rs.next()) {
                 ReporteMensual reporte = new ReporteMensual();
                 reporte.setIdReporteMensual(rs.getInt("idreporteMensual"));
-                reporte.setEstado(rs.getString("esta_reporteMensual"));
+                reporte.setEstado(rs.getString("estado_reporteMensual"));
                 reporte.setHorasReportadas(rs.getInt("horasReportadas"));
                 reporte.setLink(rs.getString("link_reporteMensual"));
                 reporte.setMes(rs.getString("mes_reporteMensual"));
@@ -42,24 +46,87 @@ public class ReporteMensualImp implements IReporteMensual {
                 reporte.setIdSeguimiento(rs.getInt("idseguimiento"));
                 listaReportes.add(reporte);
                 System.out.println(reporte.getEstado());
-                
-                
+
             }
         } catch (SQLException ex) {
-            System.out.println("Error en la creacion de el Statement: " + ex.getMessage());
-            /*Alert alert = new Alert(Alert.AlertType.WARNING);
+            System.out.println("Error en la creacion de el Statement: " + ex);
+            Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Error con BD");
             alert.setHeaderText("Hubo un error con la conexión a la Base de Datos,"
                     + "por favor intente más tarde");
-            alert.showAndWait();*/
-        } finally {
-            /*try {
-                conexionBD.close();
-            } catch (SQLException ex) {
-                System.out.println("Error al cerrar la conexion" + ex.getMessage());
-            }*/
+            alert.showAndWait();
         }
         return listaReportes;
     }
-    
+
+    @Override
+    public boolean cambiarEstado(String nuevoEstado, int idReporte) {
+        Connection conexionBD = new ConexionBD().getConexionBD();
+        String sQuery = "UPDATE reportemensual set estado_reporteMensual = '"
+                + nuevoEstado + "' " + "where idreporteMensual = "
+                + idReporte + ";";
+
+        try {
+            Statement statement = conexionBD.createStatement();
+            int rs = statement.executeUpdate(sQuery);
+
+            if (rs == 1 || rs == 2 || rs == 0) {
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return false;
+        }
+        return false;
+
+    }
+
+    @Override
+    public boolean guardarReporte(ReporteMensual reporte) {
+        String query = "INSERT INTO reportemensual(horasReportadas,link_reporteMensual,mes_reporteMensual,estado_reporteMensual,noReporte,idseguimiento) VALUES ('" + reporte.getHorasReportadas() + "','"
+                + reporte.getLink() + "','" + reporte.getMes() + "','" + "Pendiente" + "','" + reporte.getNumeroReporte() + "','" + reporte.getIdSeguimiento() + "');";
+        System.out.println(query);
+        Connection conexionBD = new ConexionBD().getConexionBD();
+        try {
+            Statement statement = conexionBD.createStatement();
+            int rs = statement.executeUpdate(query);
+            if (rs == 1 || rs == 2 || rs == 0) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error en la creacion de el Statement" + ex.getMessage());
+        } finally {
+            try {
+                conexionBD.close();
+            } catch (SQLException ex) {
+                System.out.println("Error al cerrar la conexion" + ex.getMessage());
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int obtenerUltimoReporte() {
+        String query = "select noReporte from reportemensual order by noReporte desc limit 1";
+        Connection conexionBD = new ConexionBD().getConexionBD();
+        int numero = 0;
+        try {
+            Statement statement = conexionBD.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+
+            while (rs != null && rs.next()) {
+
+                numero = rs.getInt("noReporte");
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ReporteMensualImp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        System.out.println(query);
+        return numero;
+    }
+
 }

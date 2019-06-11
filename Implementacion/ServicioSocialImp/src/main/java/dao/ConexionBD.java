@@ -23,7 +23,7 @@ public class ConexionBD {
     private final String password = "#ServicioSocial01";
     private final String time_zone = "?useUnicode=true&useJDBCCompliantTimezone"
             + "Shift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    private final String url = "jdbc:mysql://" + host + "/" + db + time_zone;
+    private final String url = "jdbc:mysql://" + host + "/" + db + time_zone; 
 
     public ConexionBD() {
         try {
