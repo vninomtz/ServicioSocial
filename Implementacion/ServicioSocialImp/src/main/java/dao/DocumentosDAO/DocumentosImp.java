@@ -112,5 +112,34 @@ public class DocumentosImp implements IDocumento{
         }
         return false;
     }
+
+    @Override
+    public boolean actualizarEstadoDocumento(String estado, int idDocumento) {
+         String sentencia = "UPDATE documento SET estado_documento = '" + estado 
+                 + "' WHERE iddocumento = " + idDocumento + ";";
+        System.out.println(sentencia);
+        Connection conexionBD = new ConexionBD().getConexionBD();
+         if(conexionBD == null) {
+             return false;
+         }
+        try {
+            Statement statement = conexionBD.createStatement();
+            int rs = statement.executeUpdate(sentencia);
+            if(rs == 1 || rs ==2  || rs == 0){
+                return true; 
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error en la creacion de el Statement" + ex.getMessage());
+            return false;
+        } finally {
+            /*try {
+                conexionBD.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                System.out.println("Error al cerrar la conexion");
+            }*/
+        }
+        return false;
+    }
     
 }

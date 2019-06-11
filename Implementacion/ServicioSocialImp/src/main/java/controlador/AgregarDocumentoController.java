@@ -79,8 +79,7 @@ public class AgregarDocumentoController implements Initializable {
             txtFecha.setOverLay(true);
         }catch(Exception ex) {
             System.out.println("Error en DatePicker");
-        }
-        
+        }  
     }
     @FXML
     private void clicBtnCancelar() {
