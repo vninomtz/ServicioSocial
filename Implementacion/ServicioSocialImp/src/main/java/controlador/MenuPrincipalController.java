@@ -30,6 +30,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import modelo.Inscripcion;
@@ -110,6 +111,7 @@ public class MenuPrincipalController implements Initializable {
                 stage.setTitle("Reportes Mensuales");
                 stage.setScene(scene);
                 stage.setResizable(false);
+                stage.initModality(Modality.APPLICATION_MODAL);
                 VerReportesController controller = (VerReportesController) loader.getController();
                 controller.setInscripcion(inscripcion);
                 stage.show();

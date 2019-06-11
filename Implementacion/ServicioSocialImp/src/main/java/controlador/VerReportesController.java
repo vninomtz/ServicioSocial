@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import dao.reportemensualDAO.ReporteMensualImp;
 import java.awt.Desktop;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -79,7 +80,7 @@ public class VerReportesController implements Initializable {
     public ReporteMensual obtenerReporteSeleccionado() {
         if (tablaReportes != null) {
             ReporteMensual reporte = (ReporteMensual) tablaReportes.getSelectionModel().getSelectedItem();
-          
+
             return reporte;
         } else {
             return null;
@@ -109,6 +110,12 @@ public class VerReportesController implements Initializable {
                 }
             });
             stage.show();
+            try {
+                File path = new File(reporte.getLink());
+                Desktop.getDesktop().open(path);
+            } catch (IOException ex) {
+                System.out.println("No se pudo abrir el Reporte:" + ex.getMessage());
+            }
 
         } catch (IOException ex) {
             System.out.println("Error al mostrar ventana Ventas: " + ex);
@@ -133,9 +140,8 @@ public class VerReportesController implements Initializable {
     private void clicBtValidarReporte() {
         ReporteMensual reporte = obtenerReporteSeleccionado();
         if (reporte != null) {
-            if (validarEstadoReporte(reporte)) {
-                mostrarVentanaValidar(reporte);
-            }
+            mostrarVentanaValidar(reporte);
+
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Advertencia");
@@ -143,8 +149,8 @@ public class VerReportesController implements Initializable {
             alert.showAndWait();
         }
     }
-    
-    private int obtenerUltimoReporte(){
+
+    private int obtenerUltimoReporte() {
         ReporteMensualImp reporteImp = new ReporteMensualImp();
         int numero = reporteImp.obtenerUltimoReporte();
         System.out.println("Numero: " + numero);
@@ -167,6 +173,12 @@ public class VerReportesController implements Initializable {
             controller.setInscripcion(inscripcion);
             controller.setReporte(obtenerUltimoReporte());
             stage.initModality(Modality.APPLICATION_MODAL);
+                        stage.setOnHidden(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    llenarTablaReportes();
+                }
+            });                       
             stage.show();
 
         } catch (IOException ex) {

@@ -20,6 +20,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -65,8 +69,8 @@ public class AgregarReporteController implements Initializable {
     private Label lbArchivoAdjunto;
     @FXML
     private JFXTextField txtHoras;
-          
 
+    File archivo = null;
     int numeroUltimoReporte;
 
     public void setReporte(int numeroReporte) {
@@ -104,27 +108,36 @@ public class AgregarReporteController implements Initializable {
         txtNumeroReporte.setEditable(false);
 
     }
- File archivo;
+
+    public File guardarDocumento() {
+        Path origen = Paths.get(archivo.getAbsolutePath());
+        Path destino = Paths.get("src\\main\\resources\\fxml\\documentos\\" + archivo.getName());
+        try {
+            Files.copy(origen, destino, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            return null;
+        }
+        return destino.toFile();
+    }
+
     @FXML
     private void clicBtCargar() throws FileNotFoundException, IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         Stage stage = new Stage();
-         archivo = fileChooser.showOpenDialog(stage);
+        archivo = fileChooser.showOpenDialog(stage);
         if (archivo != null) {
             lbArchivoAdjunto.setText(archivo.getName());
-            
+
         }
 
     }
 
-    
-    
-    public void guardarReporte(){
-        int horas =  Integer.parseInt(txtHoras.getText());
+    public void guardarReporte() {
+        int horas = Integer.parseInt(txtHoras.getText());
         String numeroReporte = txtNumeroReporte.getText();
         String mes = (String) cbxMes.getValue();
-        
+
         ReporteMensual reporte = new ReporteMensual();
         reporte.setNumeroReporte(Integer.parseInt(numeroReporte));
         reporte.setIdSeguimiento(inscripcion.getSeguimiento().getIdSeguimiento());
@@ -133,13 +146,17 @@ public class AgregarReporteController implements Initializable {
         reporte.setMes(mes);
         ReporteMensualImp reporteImp = new ReporteMensualImp();
         reporteImp.guardarReporte(reporte);
- 
+
+    }
+    
+    @FXML 
+    private void clicBtSalir(){
+        Stage principal = (Stage) btSalir.getScene().getWindow();
+        principal.close();
     }
 
     @FXML
     private void clicBtGuardar() {
-
-        
 
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirmación");
@@ -150,6 +167,8 @@ public class AgregarReporteController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             guardarReporte();
+            Stage ventana = (Stage) btSalir.getScene().getWindow();
+            ventana.close();
         } else {
             // ... user chose CANCEL or closed the dialog
         }

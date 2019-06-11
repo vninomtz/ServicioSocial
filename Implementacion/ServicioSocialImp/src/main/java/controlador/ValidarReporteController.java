@@ -43,8 +43,6 @@ public class ValidarReporteController implements Initializable {
         this.reporte = reporte;
         iniciaInterfaz();
     }
-    
-    
 
     @FXML
     private void clicBtAprobar() {
@@ -54,6 +52,24 @@ public class ValidarReporteController implements Initializable {
         alert.setTitle("Reporte Aprobado");
         alert.setHeaderText("El reporte se aprobo Exitosamente");
         alert.showAndWait();
+        Stage principal = (Stage) btnSalir.getScene().getWindow();
+        principal.close();
+    }
+
+    @FXML
+    private void clicBtRechazar() {
+        ReporteMensualImp reporteimp = new ReporteMensualImp();
+        reporteimp.cambiarEstado("Rechazado", reporte.getIdReporteMensual());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Reporte Reachazo");
+        alert.setHeaderText("El reporte se ha sido rechazado");
+        alert.showAndWait();
+        Stage principal = (Stage) btnSalir.getScene().getWindow();
+        principal.close();
+    }
+
+    @FXML
+    private void clicBtnSalir() {
         Stage principal = (Stage) btnSalir.getScene().getWindow();
         principal.close();
     }
