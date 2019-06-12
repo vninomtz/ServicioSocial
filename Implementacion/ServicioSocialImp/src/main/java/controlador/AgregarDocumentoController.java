@@ -174,8 +174,7 @@ public class AgregarDocumentoController implements Initializable {
                 } else {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Error en BD");
-                    alert.setHeaderText("Hubo un error en la conexion a la Base de Datos,"
-                            + "no se pudo guardar el documento, intente más tarde");
+                    alert.setHeaderText("No se pudo guardar el documento, intente más tarde");
                     alert.showAndWait();
                 }
             } else {
