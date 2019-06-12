@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -10,7 +16,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="732.0" style="-fx-background-color: FFFFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.VerReportesController">
    <children>
-      <AnchorPane prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: #dee6f2;">
+      <AnchorPane layoutY="31.0" prefHeight="516.0" prefWidth="200.0" style="-fx-background-color: #dee6f2;">
          <children>
             <ImageView fitHeight="77.0" fitWidth="169.0" layoutX="26.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -27,14 +33,14 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btnSalir" layoutY="266.0" prefHeight="45.0" prefWidth="200.0" stylesheets="@../styles/Styles.css" text="Salir" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <JFXButton fx:id="btnSalir" layoutY="266.0" onAction="#ventanaMenuPrincipal" prefHeight="45.0" prefWidth="200.0" stylesheets="@../styles/Styles.css" text="Regresar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
          </children>
       </AnchorPane>
-      <TableView fx:id="tablaReportes" layoutX="219.0" layoutY="98.0" prefHeight="305.0" prefWidth="479.0" styleClass="tablaAlumnos" stylesheets="@../styles/Styles.css">
+      <TableView fx:id="tablaReportes" layoutX="209.0" layoutY="98.0" prefHeight="389.0" prefWidth="505.0" styleClass="tablaAlumnos" stylesheets="@../styles/Styles.css">
          <columns>
             <TableColumn fx:id="colNumeroReporte" prefWidth="131.0" text="N. Reporte" />
             <TableColumn fx:id="colMes" prefWidth="139.0" text="Mes" />
@@ -42,5 +48,46 @@
             <TableColumn fx:id="colEstado" prefWidth="253.0" text="Estado" />
          </columns>
       </TableView>
+      <Label layoutX="250.0" layoutY="55.0" text="Estudiante: ">
+         <font>
+            <Font name="System Bold Italic" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="251.0" layoutY="35.0" text="Matrícula:">
+         <font>
+            <Font name="System Bold Italic" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbMatricula" layoutX="322.0" layoutY="36.0" prefHeight="17.0" prefWidth="133.0" text="Label" />
+      <Label fx:id="lbEstudiante" layoutX="322.0" layoutY="56.0" prefHeight="17.0" prefWidth="200.0" text="Label" />
+      <ImageView fitHeight="45.0" fitWidth="54.0" layoutX="200.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/estudiante.png" />
+         </image>
+      </ImageView>
+      <MenuBar layoutY="-1.0" prefHeight="30.0" prefWidth="732.0" stylesheets="@../styles/Styles.css">
+         <menus>
+            <Menu mnemonicParsing="false" text="Estudiantes">
+               <items>
+                  <MenuItem fx:id="mtAdministrarEstudiantes" mnemonicParsing="false" text="Administrar" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Servicio Social">
+               <items>
+                  <MenuItem fx:id="mtAdministrarServicioSocial" mnemonicParsing="false" text="Administrar" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Cuenta">
+               <items>
+                  <MenuItem fx:id="mtSalirCuenta" mnemonicParsing="false" onAction="#clicBtSalirCuenta" text="Salir" />
+               </items>
+            </Menu>
+         </menus>
+         <styleClass>
+            <String fx:value="menuBar" />
+            <String fx:value="menu" />
+         </styleClass>
+      </MenuBar>
+      <Separator layoutY="31.0" prefHeight="0.0" prefWidth="732.0" />
    </children>
 </AnchorPane>

@@ -15,7 +15,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,6 +28,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -51,7 +57,7 @@ public class VerReportesController implements Initializable {
     @FXML
     private JFXButton btnAgregarReporte;
     @FXML
-    private JFXButton btnSalir;
+    private JFXButton btnRegresar;
     @FXML
     private TableView tablaReportes;
     @FXML
@@ -62,6 +68,16 @@ public class VerReportesController implements Initializable {
     private TableColumn<ReporteMensual, Integer> colHoras;
     @FXML
     private TableColumn<ReporteMensual, String> colEstado;
+    @FXML
+    private MenuItem mtAdministrarEstudiantes;
+    @FXML
+    private MenuItem mtAdministrarServicioSocial;
+    @FXML
+    private MenuItem mtSalirCuenta;
+    @FXML
+    private Label lbMatricula;
+    @FXML
+    private Label lbEstudiante;
 
     private Inscripcion inscripcion = new Inscripcion();
 
@@ -72,7 +88,8 @@ public class VerReportesController implements Initializable {
      */
     public void setInscripcion(Inscripcion inscripcion) {
         this.inscripcion = inscripcion;
-
+        lbMatricula.setText(inscripcion.getEstudiante().getMatricula());
+        lbEstudiante.setText(inscripcion.getEstudiante().toString());
         llenarTablaReportes();
 
     }
@@ -84,6 +101,55 @@ public class VerReportesController implements Initializable {
             return reporte;
         } else {
             return null;
+        }
+    }
+
+    @FXML
+    private void clicBtSalirCuenta() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmación");
+        alert.setHeaderText("Salir del sistema");
+        alert.setContentText("¿Estás seguro de que quieres salir?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/InicioSesion.fxml"));
+            try {
+                AnchorPane anchorpane = loader.load();
+                Scene scene = new Scene(anchorpane);
+                scene.getStylesheets().add("/styles/Styles.css");
+                Stage stage = new Stage();
+                stage.setTitle("Servicio Social - Inicio Sesion");
+                stage.getIcons().add(new Image("/fxml/img/User1.png"));
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+                Stage principal = (Stage) btnRegresar.getScene().getWindow();
+                principal.close();
+            } catch (IOException ex) {
+                System.out.println("Error al mostrar la ventana:" + ex.getMessage());
+            }
+        }
+
+    }
+
+    @FXML
+    private void ventanaMenuPrincipal() {
+        FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/MenuPrincipal.fxml"));
+        try {
+            AnchorPane anchorpane = loader.load();
+            Scene scene = new Scene(anchorpane);
+            scene.getStylesheets().add("/styles/Styles.css");
+            Stage stage = new Stage();
+            stage.setTitle("Servicio Social");
+            stage.getIcons().add(new Image("/fxml/img/User1.png"));
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+            Stage principal = (Stage) btnRegresar.getScene().getWindow();
+            principal.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(VerDocumentosController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -166,19 +232,19 @@ public class VerReportesController implements Initializable {
             Scene scene = new Scene(anchorpane);
             scene.getStylesheets().add("/styles/Styles.css");
             Stage stage = new Stage();
-            stage.setTitle("Registrar Ventas");
+            stage.setTitle("Agregar Reporte");
             stage.setScene(scene);
             stage.setResizable(false);
             AgregarReporteController controller = (AgregarReporteController) loader.getController();
             controller.setInscripcion(inscripcion);
             controller.setReporte(obtenerUltimoReporte());
             stage.initModality(Modality.APPLICATION_MODAL);
-                        stage.setOnHidden(new EventHandler<WindowEvent>() {
+            stage.setOnHidden(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent event) {
                     llenarTablaReportes();
                 }
-            });                       
+            });
             stage.show();
 
         } catch (IOException ex) {
