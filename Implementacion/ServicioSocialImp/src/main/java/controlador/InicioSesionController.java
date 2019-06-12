@@ -1,7 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Autor: Victor Manuel Niño Martínez
+ * Experiencia Educativa: Principios de Construcción de Software
+ * Docente: Fredy Castañeda Sánchez
+ * Fecha de creación: 10/06/2019
+ * Fecha de ultima actualización: 11/06/2019
+ * Descripción: Controlador de la interfaz IniciarSesion.fxml
  */
 package controlador;
 
@@ -14,8 +17,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,13 +34,13 @@ import serviciosocial.main.MainApp;
  */
 public class InicioSesionController implements Initializable {
 
-    @FXML
-    private JFXPasswordField txtContrasenia;
-    @FXML
-    private JFXTextField txtUsuario;
-    @FXML
-    private JFXButton btnIniciarSesion;
+    @FXML private JFXPasswordField txtContrasenia;
+    @FXML private JFXTextField txtUsuario;
+    @FXML private JFXButton btnIniciarSesion;
     
+    /**
+     * Método que evalua si es usuario y abre el menu principal
+     */
     @FXML
     private void clicBtInciarSesion() {
         if(validarCampos()) {
@@ -71,6 +72,11 @@ public class InicioSesionController implements Initializable {
         }
         
     }
+    
+    /**
+     * Método que valida que todo los campos estén llenos
+     * @return true si todos los campos están llenos y false si no
+     */
     public boolean validarCampos() {
         if(txtUsuario.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

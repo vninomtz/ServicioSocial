@@ -1,7 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Autor: Victor Manuel Niño Martínez
+ * Experiencia Educativa: Principios de Construcción de Software
+ * Docente: Fredy Castañeda Sánchez
+ * Fecha de creación: 10/06/2019
+ * Fecha de ultima actualización: 11/06/2019
+ * Descripción: Controlador de la interfaz ValidarDocumento.fxml
  */
 package controlador;
 
@@ -11,14 +14,10 @@ import com.jfoenix.controls.JFXTextField;
 import dao.documentosDAO.DocumentosImp;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.Optional;
 import java.util.ResourceBundle;
-import static javafx.application.Platform.exit;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import modelo.Documento;
 
@@ -31,23 +30,19 @@ public class ValidarDocumentoController implements Initializable {
 
     private final String RECHAZAR = "Rechazado";
     private final String VALIDAR = "Validado";
-    @FXML
-    private JFXTextArea txtDescripcionDoc;
-    @FXML
-    private JFXButton btnCancelar;
-    @FXML
-    private JFXButton btnValidar;
-    @FXML
-    private JFXTextField txtTipoDoc;
-    @FXML
-    private JFXButton btnRechazar;
-    @FXML
-    private JFXTextField txtEstadoDoc;
-    @FXML
-    private JFXTextField txtFechaDoc;
-    
+    @FXML private JFXTextArea txtDescripcionDoc;
+    @FXML private JFXButton btnCancelar;
+    @FXML private JFXButton btnValidar;
+    @FXML private JFXTextField txtTipoDoc;
+    @FXML private JFXButton btnRechazar;
+    @FXML private JFXTextField txtEstadoDoc;
+    @FXML private JFXTextField txtFechaDoc;
     private Documento documento;
 
+     /**
+     * Método que recibe un objeto del stage VerDocumentos
+     * @param documento objeto de tipo Documento
+     */
     public void setDocumento(Documento documento) {
         this.documento = documento;
         txtTipoDoc.setText(documento.getTipo());
@@ -57,14 +52,18 @@ public class ValidarDocumentoController implements Initializable {
         txtFechaDoc.setText(format.format(documento.getFecha()));
     }
     
-   
-
+    /**
+     * Método que cierra el stage ValidarDocumento.fxml
+     */
     @FXML
     private void clicCancelar() {
         Stage ventana = (Stage)btnCancelar.getScene().getWindow();
         ventana.close();
     }
     
+    /**
+     * Método que cambia el estado del Documento a Validado 
+     */
     @FXML
     private void clicBtnValidar() {
         DocumentosImp documentoImp = new DocumentosImp();
@@ -84,6 +83,9 @@ public class ValidarDocumentoController implements Initializable {
         }
     }
     
+    /**
+     * Método que cambia el estado del Documento a Rechazado
+     */
     @FXML
     private void clicBtnRechazar() {
         DocumentosImp documentoImp = new DocumentosImp();
@@ -103,16 +105,9 @@ public class ValidarDocumentoController implements Initializable {
         }
         
     }
-    
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-
-    @FXML
-    private void clicBtnCancelar(ActionEvent event) {
-    }
-    
+    }        
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -65,27 +64,20 @@
             </Menu>
          </menus>
       </MenuBar>
-      <JFXButton fx:id="btnBuscar" buttonType="RAISED" layoutX="536.0" layoutY="42.0" style="-fx-background-color: #0055A3;" text="Buscar" textFill="WHITE" AnchorPane.rightAnchor="210.0">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </JFXButton>
       <Separator layoutY="31.0" prefHeight="0.0" prefWidth="682.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <JFXComboBox fx:id="cbEstadoDoc" layoutX="627.0" layoutY="40.0" prefHeight="25.0" prefWidth="147.0" promptText="Estado " />
-      <JFXComboBox fx:id="cbTipoDoc" layoutX="627.0" layoutY="73.0" prefHeight="25.0" prefWidth="147.0" promptText="Tipo " />
-      <Label layoutX="250.0" layoutY="61.0" text="Estudiante: ">
+      <Label layoutX="281.0" layoutY="69.0" text="Estudiante: ">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="251.0" layoutY="41.0" text="Matrícula:">
+      <Label layoutX="282.0" layoutY="49.0" text="Matrícula:">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="lbMatricula" layoutX="322.0" layoutY="42.0" prefHeight="17.0" prefWidth="133.0" text="Label" />
-      <Label fx:id="lbEstudiante" layoutX="322.0" layoutY="62.0" prefHeight="17.0" prefWidth="200.0" text="Label" />
-      <ImageView fitHeight="45.0" fitWidth="54.0" layoutX="200.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="lbMatricula" layoutX="353.0" layoutY="50.0" prefHeight="17.0" prefWidth="133.0" text="Label" />
+      <Label fx:id="lbEstudiante" layoutX="353.0" layoutY="70.0" prefHeight="17.0" prefWidth="200.0" text="Label" />
+      <ImageView fitHeight="45.0" fitWidth="54.0" layoutX="231.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/estudiante.png" />
          </image>

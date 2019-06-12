@@ -30,6 +30,9 @@ public class DocumentosImp implements IDocumento{
         String sQuery = "SELECT * FROM documento where idseguimiento ="
                 +idSeguimiento +";";
 
+        if(conexionBD == null) {
+            return null;
+        }
         System.out.println(sQuery);
         try {
             Statement statement = conexionBD.createStatement();
@@ -45,8 +48,6 @@ public class DocumentosImp implements IDocumento{
                 documento.setIdSeguimiento(rs.getInt("idseguimiento"));
                 
                 listaDocumentos.add(documento);
-                
-                
             }
         } catch (SQLException ex) {
             System.out.println("Error en la creacion de el Statement: " + ex.getMessage());
@@ -68,7 +69,6 @@ public class DocumentosImp implements IDocumento{
 
     @Override
     public boolean guardarDocumento(Documento documento) {
-        System.out.println("Entro");
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         String fecha = formato.format(documento.getFecha());
         String rutaOriginal = documento.getLink();

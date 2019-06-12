@@ -1,7 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Autor: Victor Manuel Niño Martínez
+ * Experiencia Educativa: Principios de Construcción de Software
+ * Docente: Fredy Castañeda Sánchez
+ * Fecha de creación: 10/06/2019
+ * Fecha de ultima actualización: 11/06/2019
+ * Descripción: Controlador de la interfaz VerDocumentos.fxml
  */
 package controlador;
 
@@ -15,9 +18,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import static javafx.application.Platform.exit;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -48,38 +48,28 @@ import serviciosocial.main.MainApp;
  */
 public class VerDocumentosController implements Initializable {
 
-    @FXML
-    private TableView<Documento> tablaDocumentos;
-    @FXML
-    private TableColumn<Documento, String> colTipoDoc;
-    @FXML
-    private TableColumn<Documento, String> colEstadoDoc;
-    @FXML
-    private TableColumn<Documento, String> colFechaDoc;
-    @FXML
-    private JFXButton btnAgregarDocumento;
-    @FXML
-    private JFXButton btnValidarDocumento;
-    @FXML
-    private JFXButton btnRegresar;
-    @FXML
-    private MenuItem mtAdministrarEstudiantes;
-    @FXML
-    private MenuItem mtAdministrarServicioSocial;
-    @FXML
-    private MenuItem mtSalirCuenta;
-    @FXML
-    private JFXButton btnBuscar;
-    @FXML
-    private JFXComboBox<?> cbEstadoDoc;
-    @FXML
-    private JFXComboBox<?> cbTipoDoc;
-    @FXML
-    private Label lbMatricula;
-    @FXML
-    private Label lbEstudiante;
+    @FXML private TableView<Documento> tablaDocumentos;
+    @FXML private TableColumn<Documento, String> colTipoDoc;
+    @FXML private TableColumn<Documento, String> colEstadoDoc;
+    @FXML private TableColumn<Documento, String> colFechaDoc;
+    @FXML private JFXButton btnAgregarDocumento;
+    @FXML private JFXButton btnValidarDocumento;
+    @FXML private JFXButton btnRegresar;
+    @FXML private MenuItem mtAdministrarEstudiantes;
+    @FXML private MenuItem mtAdministrarServicioSocial;
+    @FXML private MenuItem mtSalirCuenta;
+    @FXML private JFXButton btnBuscar;
+    @FXML private JFXComboBox<?> cbEstadoDoc;
+    @FXML private JFXComboBox<?> cbTipoDoc;
+    @FXML private Label lbMatricula;
+    @FXML private Label lbEstudiante;
     private Inscripcion inscripcionEstudiante;
 
+    /**
+     * Método que recibe un objeto Inscripcion de la interfaz MenuPrincipal.fxml
+     *
+     * @param inscripcion objeto de tipo Inscripcion
+     */
     public void setInscripcion(Inscripcion inscripcion) {
         this.inscripcionEstudiante = inscripcion;
         lbMatricula.setText(inscripcionEstudiante.getEstudiante().getMatricula());
@@ -87,7 +77,10 @@ public class VerDocumentosController implements Initializable {
         llenarTablaDocumentos();
 
     }
-    
+
+    /**
+     * Método que regresa a la interfaz inicioSesion.fxml
+     */
     @FXML
     private void clicBtSalirCuenta() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -95,7 +88,7 @@ public class VerDocumentosController implements Initializable {
         alert.setHeaderText("Salir del sistema");
         alert.setContentText("¿Estás seguro de que quieres salir?");
         Optional<ButtonType> result = alert.showAndWait();
-        if(result.get() == ButtonType.OK) {
+        if (result.get() == ButtonType.OK) {
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/InicioSesion.fxml"));
             try {
                 AnchorPane anchorpane = loader.load();
@@ -110,12 +103,15 @@ public class VerDocumentosController implements Initializable {
                 Stage principal = (Stage) btnRegresar.getScene().getWindow();
                 principal.close();
             } catch (IOException ex) {
-                 System.out.println("Error al mostrar la ventana:" + ex.getMessage());
+                System.out.println("Error al mostrar la ventana:" + ex.getMessage());
             }
-      }
+        }
 
     }
 
+    /**
+     * Método que abre que regresa a la interfaz MenuPrincipal.fxml
+     */
     @FXML
     private void ventanaMenuPrincipal() {
         FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/MenuPrincipal.fxml"));
@@ -132,10 +128,13 @@ public class VerDocumentosController implements Initializable {
             Stage principal = (Stage) btnRegresar.getScene().getWindow();
             principal.close();
         } catch (IOException ex) {
-            Logger.getLogger(VerDocumentosController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error al mostrar la ventana: " + ex.getMessage());
         }
     }
 
+    /**
+     * Método que abre el stage AgregarDocumento.fxml
+     */
     @FXML
     private void ventanaAgregarDocumento() {
         FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/AgregarDocumento.fxml"));
@@ -159,10 +158,13 @@ public class VerDocumentosController implements Initializable {
             });
             stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(VerDocumentosController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error al mostrar la ventana: " + ex.getMessage());
         }
     }
 
+    /**
+     * Método que abre el Stage ValidarDocumento.fxml
+     */
     @FXML
     private void ventanaValidarDocumento() {
         Documento documento = tablaDocumentos.getSelectionModel().getSelectedItem();
@@ -188,33 +190,40 @@ public class VerDocumentosController implements Initializable {
                 });
                 stage.show();
                 try {
-                    File path = new File (documento.getLink());
+                    File path = new File(documento.getLink());
                     Desktop.getDesktop().open(path);
-                }catch (IOException ex) {
-                     System.out.println("No se pudo abrir el documento:" +  ex.getMessage());
+                } catch (IOException ex) {
+                    System.out.println("No se pudo abrir el documento:" + ex.getMessage());
                 }
             } catch (IOException ex) {
-                Logger.getLogger(VerDocumentosController.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Error al mostrar la ventana: " + ex.getMessage());
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Advertencia");
-                alert.setHeaderText("Seleccione un documento primero");
-                alert.showAndWait();
+            alert.setTitle("Advertencia");
+            alert.setHeaderText("Seleccione un documento primero");
+            alert.showAndWait();
         }
     }
 
+    /**
+     * Método para llena la tabla con los Documento de el Estudiante
+     */
     public void llenarTablaDocumentos() {
         DocumentosImp documentoimp = new DocumentosImp();
-        //List<Documento> listadoc = documentoimp.getDocumentos(inscripcionEstudiante.getSeguimiento().getIdSeguimiento());
-        inscripcionEstudiante.getSeguimiento().setListaDocumentos(documentoimp.getDocumentos(inscripcionEstudiante.getSeguimiento().getIdSeguimiento()));
-        colTipoDoc.setCellValueFactory(new PropertyValueFactory("tipo"));
-        colEstadoDoc.setCellValueFactory(new PropertyValueFactory("estado"));
-        colFechaDoc.setCellValueFactory(new PropertyValueFactory("fecha"));
+        List<Documento> listaDocumentos = documentoimp.getDocumentos(inscripcionEstudiante.getSeguimiento().getIdSeguimiento());
+        
+        if (listaDocumentos != null) {
+            inscripcionEstudiante.getSeguimiento().setListaDocumentos(listaDocumentos);
+            colTipoDoc.setCellValueFactory(new PropertyValueFactory("tipo"));
+            colEstadoDoc.setCellValueFactory(new PropertyValueFactory("estado"));
+            colFechaDoc.setCellValueFactory(new PropertyValueFactory("fecha"));
 
-        ObservableList<Documento> observableList = FXCollections.observableArrayList(inscripcionEstudiante.getSeguimiento().getListaDocumentos());
+            ObservableList<Documento> observableList
+                    = FXCollections.observableArrayList(inscripcionEstudiante.getSeguimiento().getListaDocumentos());
 
-        tablaDocumentos.setItems(observableList);
+            tablaDocumentos.setItems(observableList);
+        }
 
     }
 

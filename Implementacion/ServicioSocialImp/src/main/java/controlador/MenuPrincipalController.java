@@ -1,7 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Autor: Victor Manuel Niño Martínez
+ * Experiencia Educativa: Principios de Construcción de Software
+ * Docente: Fredy Castañeda Sánchez
+ * Fecha de creación: 10/06/2019
+ * Fecha de ultima actualización: 11/06/2019
+ * Descripción: Controlador de la interfaz MenuPrincipal.fxml
  */
 package controlador;
 
@@ -13,7 +16,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import static javafx.application.Platform.exit;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -36,40 +38,26 @@ import javafx.util.Callback;
 import modelo.Inscripcion;
 import serviciosocial.main.MainApp;
 
-/**
- * FXML Controller class
- *
- */
+
 public class MenuPrincipalController implements Initializable {
 
-    @FXML
-    private TableView<Inscripcion> tablaEstudiantes;
-    @FXML
-    private TableColumn<Inscripcion, String> colMatricula;
-    @FXML
-    private TableColumn<Inscripcion, String> colNombre;
-    @FXML
-    private TableColumn<Inscripcion, String> colProgramaEducativo;
-    @FXML
-    private JFXButton btnVerDocumentos;
-    @FXML
-    private JFXButton btnVerReportesMensuales;
-    @FXML
-    private JFXButton btnRegistrarProyecto;
-    @FXML
-    private MenuItem mtAdministrarEstudiantes;
-    @FXML
-    private MenuItem mtAdministrarServicioSocial;
-    @FXML
-    private MenuItem mtSalirCuenta;
-    @FXML
-    private JFXTextField txtBuscarEstudiante;
-    @FXML
-    private JFXButton btnBuscar;
-
+    @FXML private TableView<Inscripcion> tablaEstudiantes;
+    @FXML private TableColumn<Inscripcion, String> colMatricula;
+    @FXML private TableColumn<Inscripcion, String> colNombre;
+    @FXML private TableColumn<Inscripcion, String> colProgramaEducativo;
+    @FXML private JFXButton btnVerDocumentos;
+    @FXML private JFXButton btnVerReportesMensuales;
+    @FXML private JFXButton btnRegistrarProyecto;
+    @FXML private MenuItem mtAdministrarEstudiantes;
+    @FXML private MenuItem mtAdministrarServicioSocial;
+    @FXML private MenuItem mtSalirCuenta;
+    @FXML private JFXTextField txtBuscarEstudiante;
+    @FXML private JFXButton btnBuscar;
     private List<Inscripcion> listaInscripciones;
     
-    
+   /**
+    * Método que regresa a la interfaz inicioSesion.fxml
+    */
   @FXML
   private void clicBtSalirCuenta() {
       Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -98,6 +86,9 @@ public class MenuPrincipalController implements Initializable {
       
   }
 
+  /**
+   * Metodo que abre el stage VerReportes.fxml
+   */
    @FXML
     private void clicBtVerReportes() {
         try {
@@ -127,6 +118,9 @@ public class MenuPrincipalController implements Initializable {
         }
     }
     
+    /**
+     * Método que abre el stage VerDocumentos.fxml
+     */
     @FXML 
     private void clicBtVerDocumentos() {
         try {
@@ -158,7 +152,9 @@ public class MenuPrincipalController implements Initializable {
         }
     }
 
-    
+    /**
+     * Método que llena la tabla estudiantes con Objetos de tipo Inscripcion
+     */
     private void llenarTablaEstudiantes() {
         InscripcionImp inscripcionImp = new InscripcionImp();
         listaInscripciones = inscripcionImp.getInscripciones();
@@ -203,9 +199,7 @@ public class MenuPrincipalController implements Initializable {
             ObservableList<Inscripcion> observableList = 
                     FXCollections.observableArrayList(listaInscripciones);
             tablaEstudiantes.setItems(observableList);
-        }
-        
-        
+        }  
     }
     
     
