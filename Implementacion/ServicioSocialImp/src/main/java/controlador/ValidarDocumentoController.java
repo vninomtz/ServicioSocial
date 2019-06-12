@@ -8,7 +8,7 @@ package controlador;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-import dao.DocumentosDAO.DocumentosImp;
+import dao.documentosDAO.DocumentosImp;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Optional;

@@ -218,7 +218,7 @@ public class VerReportesController implements Initializable {
 
     private int obtenerUltimoReporte() {
         ReporteMensualImp reporteImp = new ReporteMensualImp();
-        int numero = reporteImp.obtenerUltimoReporte();
+        int numero = reporteImp.obtenerUltimoReporte(inscripcion.getSeguimiento().getIdSeguimiento());
         System.out.println("Numero: " + numero);
         return numero;
     }

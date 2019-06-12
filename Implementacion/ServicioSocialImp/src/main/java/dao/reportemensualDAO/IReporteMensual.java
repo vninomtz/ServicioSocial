@@ -20,6 +20,6 @@ public interface IReporteMensual {
 
     public boolean guardarReporte(ReporteMensual reporte);
 
-    public int obtenerUltimoReporte();
+    public int obtenerUltimoReporte(int idseguimiento);
 
 }
