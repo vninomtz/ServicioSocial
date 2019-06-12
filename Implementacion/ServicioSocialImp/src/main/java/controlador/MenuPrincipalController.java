@@ -115,6 +115,8 @@ public class MenuPrincipalController implements Initializable {
                 VerReportesController controller = (VerReportesController) loader.getController();
                 controller.setInscripcion(inscripcion);
                 stage.show();
+                Stage principal = (Stage) btnVerReportesMensuales.getScene().getWindow();
+                principal.close();
             } else {
                 Alert alert = new Alert(AlertType.WARNING);
                 alert.setTitle("Advertencia");

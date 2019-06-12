@@ -133,7 +133,49 @@ public class AgregarReporteController implements Initializable {
 
     }
 
+    public static boolean isNumeric(String str) {
+        try {
+            double d = Double.parseDouble(str);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validarDatos() {
+
+        if (cbxMes.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Alerta");
+            alert.setHeaderText("Por favor seleccione un mes");
+            alert.showAndWait();
+            return false;
+        } else if (txtHoras.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Alerta");
+            alert.setHeaderText("Por favor ingrese las horas");
+            alert.showAndWait();
+            return false;
+        }else if(!isNumeric(txtHoras.getText())){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Alerta");
+            alert.setHeaderText("Por favor ingrese datos validos en horas");
+            alert.showAndWait();
+            return false;
+        }else if(archivo == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Alerta");
+            alert.setHeaderText("Por favor seleccione un archivo");
+            alert.showAndWait();
+            return false;
+        }
+        return true;
+    }
+
     public void guardarReporte() {
+        System.out.println("Btotn");
+
+        System.out.println("hshs");
         int horas = Integer.parseInt(txtHoras.getText());
         String numeroReporte = txtNumeroReporte.getText();
         String mes = (String) cbxMes.getValue();
@@ -148,30 +190,32 @@ public class AgregarReporteController implements Initializable {
         reporteImp.guardarReporte(reporte);
 
     }
-    
-    @FXML 
-    private void clicBtSalir(){
+
+    @FXML
+    private void clicBtSalir() {
         Stage principal = (Stage) btSalir.getScene().getWindow();
         principal.close();
     }
 
     @FXML
     private void clicBtGuardar() {
+        if (validarDatos()) {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Confirmación");
+            alert.setHeaderText("Registro de Reporte Numero: " + (String) Integer.toString(numeroUltimoReporte + 1) + " del Estudiante: "
+                    + inscripcion.getEstudiante().getNombre() + " " + inscripcion.getEstudiante().getPaterno());
+            alert.setContentText("Confirme la operación");
 
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Confirmación");
-        alert.setHeaderText("Registro de Reporte Numero: " + (String) Integer.toString(numeroUltimoReporte + 1) + " del Estudiante: "
-                + inscripcion.getEstudiante().getNombre() + " " + inscripcion.getEstudiante().getPaterno());
-        alert.setContentText("Confirme la operación");
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            guardarReporte();
-            Stage ventana = (Stage) btSalir.getScene().getWindow();
-            ventana.close();
-        } else {
-            // ... user chose CANCEL or closed the dialog
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                guardarReporte();
+                Stage ventana = (Stage) btSalir.getScene().getWindow();
+                ventana.close();
+            } else {
+                // ... user chose CANCEL or closed the dialog
+            }
         }
+
     }
 
     /**
