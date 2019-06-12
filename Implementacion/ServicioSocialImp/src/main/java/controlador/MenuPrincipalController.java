@@ -38,58 +38,69 @@ import javafx.util.Callback;
 import modelo.Inscripcion;
 import serviciosocial.main.MainApp;
 
-
 public class MenuPrincipalController implements Initializable {
 
-    @FXML private TableView<Inscripcion> tablaEstudiantes;
-    @FXML private TableColumn<Inscripcion, String> colMatricula;
-    @FXML private TableColumn<Inscripcion, String> colNombre;
-    @FXML private TableColumn<Inscripcion, String> colProgramaEducativo;
-    @FXML private JFXButton btnVerDocumentos;
-    @FXML private JFXButton btnVerReportesMensuales;
-    @FXML private JFXButton btnRegistrarProyecto;
-    @FXML private MenuItem mtAdministrarEstudiantes;
-    @FXML private MenuItem mtAdministrarServicioSocial;
-    @FXML private MenuItem mtSalirCuenta;
-    @FXML private JFXTextField txtBuscarEstudiante;
-    @FXML private JFXButton btnBuscar;
+    @FXML
+    private TableView<Inscripcion> tablaEstudiantes;
+    @FXML
+    private TableColumn<Inscripcion, String> colMatricula;
+    @FXML
+    private TableColumn<Inscripcion, String> colNombre;
+    @FXML
+    private TableColumn<Inscripcion, String> colProgramaEducativo;
+    @FXML
+    private JFXButton btnVerDocumentos;
+    @FXML
+    private JFXButton btnVerReportesMensuales;
+    @FXML
+    private JFXButton btnRegistrarProyecto;
+    @FXML
+    private MenuItem mtAdministrarEstudiantes;
+    @FXML
+    private MenuItem mtAdministrarServicioSocial;
+    @FXML
+    private MenuItem mtSalirCuenta;
+    @FXML
+    private JFXTextField txtBuscarEstudiante;
+    @FXML
+    private JFXButton btnBuscar;
     private List<Inscripcion> listaInscripciones;
-    
-   /**
-    * Método que regresa a la interfaz inicioSesion.fxml
-    */
-  @FXML
-  private void clicBtSalirCuenta() {
-      Alert alert = new Alert(AlertType.CONFIRMATION);
-      alert.setTitle("Confirmación");
-      alert.setHeaderText("Salir del sistema");
-      alert.setContentText("¿Estás seguro de que quieres salir?");
-      Optional<ButtonType> result = alert.showAndWait();
-      if(result.get() == ButtonType.OK) {
-            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/InicioSesion.fxml"));
-                try {
-                    AnchorPane anchorpane = loader.load();
-                    Scene scene = new Scene(anchorpane);
-                    scene.getStylesheets().add("/styles/Styles.css");
-                    Stage stage = new Stage();
-                    stage.setTitle("Servicio Social - Inicio Sesion");
-                    stage.getIcons().add(new Image("/fxml/img/User1.png"));
-                    stage.setScene(scene);
-                    stage.setResizable(false);
-                    stage.show();
-                    Stage principal = (Stage) btnVerDocumentos.getScene().getWindow();
-                    principal.close();
-                } catch (IOException ex) {
-                    System.out.println("Error al mostrar la ventana:" + ex.getMessage());
-                }
-      }
-      
-  }
 
-  /**
-   * Metodo que abre el stage VerReportes.fxml
-   */
-   @FXML
+    /**
+     * Método que regresa a la interfaz inicioSesion.fxml
+     */
+    @FXML
+    private void clicBtSalirCuenta() {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmación");
+        alert.setHeaderText("Salir del sistema");
+        alert.setContentText("¿Estás seguro de que quieres salir?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/InicioSesion.fxml"));
+            try {
+                AnchorPane anchorpane = loader.load();
+                Scene scene = new Scene(anchorpane);
+                scene.getStylesheets().add("/styles/Styles.css");
+                Stage stage = new Stage();
+                stage.setTitle("Servicio Social - Inicio Sesion");
+                stage.getIcons().add(new Image("/fxml/img/User1.png"));
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+                Stage principal = (Stage) btnVerDocumentos.getScene().getWindow();
+                principal.close();
+            } catch (IOException ex) {
+                System.out.println("Error al mostrar la ventana:" + ex.getMessage());
+            }
+        }
+
+    }
+
+    /**
+     * Metodo que abre el stage VerReportes.fxml
+     */
+    @FXML
     private void clicBtVerReportes() {
         try {
             Inscripcion inscripcion = tablaEstudiantes.getSelectionModel().getSelectedItem();
@@ -119,11 +130,11 @@ public class MenuPrincipalController implements Initializable {
             System.out.println("Error al mostrar ventana Ventas: " + ex);
         }
     }
-    
+
     /**
      * Método que abre el stage VerDocumentos.fxml
      */
-    @FXML 
+    @FXML
     private void clicBtVerDocumentos() {
         try {
             Inscripcion inscripcion = tablaEstudiantes.getSelectionModel().getSelectedItem();
@@ -160,51 +171,46 @@ public class MenuPrincipalController implements Initializable {
     private void llenarTablaEstudiantes() {
         InscripcionImp inscripcionImp = new InscripcionImp();
         listaInscripciones = inscripcionImp.getInscripciones();
-        if(listaInscripciones != null) {
-            colMatricula.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Inscripcion, String>,
-                    ObservableValue<String>>() {
+        if (listaInscripciones != null) {
+            colMatricula.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Inscripcion, String>, ObservableValue<String>>() {
                 @Override
                 public ObservableValue<String> call(TableColumn.CellDataFeatures<Inscripcion, String> inscripcion) {
-                    if(inscripcion.getValue() != null) {
+                    if (inscripcion.getValue() != null) {
                         return new SimpleStringProperty(inscripcion.getValue().getEstudiante().getMatricula());
                     } else {
                         return new SimpleStringProperty("<no name>");
                     }
                 }
 
-                    });
-            colNombre.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Inscripcion, String>,
-                    ObservableValue<String>>() {
+            });
+            colNombre.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Inscripcion, String>, ObservableValue<String>>() {
                 @Override
                 public ObservableValue<String> call(TableColumn.CellDataFeatures<Inscripcion, String> inscripcion) {
-                    if(inscripcion.getValue() != null) {
+                    if (inscripcion.getValue() != null) {
                         return new SimpleStringProperty(inscripcion.getValue().getEstudiante().toString());
                     } else {
                         return new SimpleStringProperty("<no name>");
                     }
                 }
 
-                    });
+            });
 
-            colProgramaEducativo.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Inscripcion, String>,
-                    ObservableValue<String>>() {
-                    @Override
-                    public ObservableValue<String> call(TableColumn.CellDataFeatures<Inscripcion, String> inscripcion) {
-                        if(inscripcion.getValue() != null) {
-                            return new SimpleStringProperty(inscripcion.getValue().getEstudiante().getProgramaEducativo());
-                        } else {
-                            return new SimpleStringProperty("<no name>");
-                        }
+            colProgramaEducativo.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Inscripcion, String>, ObservableValue<String>>() {
+                @Override
+                public ObservableValue<String> call(TableColumn.CellDataFeatures<Inscripcion, String> inscripcion) {
+                    if (inscripcion.getValue() != null) {
+                        return new SimpleStringProperty(inscripcion.getValue().getEstudiante().getProgramaEducativo());
+                    } else {
+                        return new SimpleStringProperty("<no name>");
                     }
-                    });
+                }
+            });
 
-            ObservableList<Inscripcion> observableList = 
-                    FXCollections.observableArrayList(listaInscripciones);
+            ObservableList<Inscripcion> observableList
+                    = FXCollections.observableArrayList(listaInscripciones);
             tablaEstudiantes.setItems(observableList);
-        }  
+        }
     }
-    
-    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

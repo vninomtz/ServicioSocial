@@ -140,7 +140,7 @@ public class AgregarReporteController implements Initializable {
      * @param str Texto del txtHoras
      * @return Verdadero si es numero
      */
-    public static boolean isNumeric(String str) {
+    public boolean isNumeric(String str) {
         try {
             double d = Double.parseDouble(str);
         } catch (NumberFormatException nfe) {
@@ -210,7 +210,7 @@ public class AgregarReporteController implements Initializable {
     }
 
     /**
-     * Ocurre cuando el usuario da clic e salir
+     * Ocurre cuando el usuario da clic en el boton salir
      *
      */
     @FXML
