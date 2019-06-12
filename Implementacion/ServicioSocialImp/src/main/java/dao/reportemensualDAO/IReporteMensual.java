@@ -1,7 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Autor: Alan González Heredia
+ * Experiencia Educativa: Principios de Construcción de Software
+ * Docente: Fredy Castañeda Sánchez
+ * Fecha de creación: 10/06/2019
+ * Fecha de ultima actualización: 11/06/2019
+ * Descripción: Interfaz IReporteMensual.java
  */
 package dao.reportemensualDAO;
 

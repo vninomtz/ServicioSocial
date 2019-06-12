@@ -1,16 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Autor: Alan González Heredia
+ * Experiencia Educativa: Principios de Construcción de Software
+ * Docente: Fredy Castañeda Sánchez
+ * Fecha de creación: 10/06/2019
+ * Fecha de ultima actualización: 11/06/2019
+ * Descripción: Controlador de la interfaz VerReportes.fxml
  */
 package controlador;
 
 import com.jfoenix.controls.JFXButton;
 import dao.reportemensualDAO.ReporteMensualImp;
 import java.awt.Desktop;
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,7 +22,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,7 +39,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import static javax.swing.Spring.width;
 import modelo.Estudiante;
 import modelo.Inscripcion;
 import modelo.ReporteMensual;
@@ -82,9 +81,9 @@ public class VerReportesController implements Initializable {
     private Inscripcion inscripcion = new Inscripcion();
 
     /**
-     * Initializes the controller class.
+     * Método que recibe un objeto Inscripcion de la interfaz MenuPrincipal.fxml
      *
-     * @param inscripcion
+     * @param inscripcion objeto de tipo Inscripcion
      */
     public void setInscripcion(Inscripcion inscripcion) {
         this.inscripcion = inscripcion;
@@ -94,16 +93,9 @@ public class VerReportesController implements Initializable {
 
     }
 
-    public ReporteMensual obtenerReporteSeleccionado() {
-        if (tablaReportes != null) {
-            ReporteMensual reporte = (ReporteMensual) tablaReportes.getSelectionModel().getSelectedItem();
-
-            return reporte;
-        } else {
-            return null;
-        }
-    }
-
+    /**
+     * Método que muestra a la interfaz inicioSesion.fxml
+     */
     @FXML
     private void clicBtSalirCuenta() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -132,6 +124,9 @@ public class VerReportesController implements Initializable {
 
     }
 
+    /**
+     * Metodo que muestra la la ventana MenuPrincipal.fxm
+     */
     @FXML
     private void ventanaMenuPrincipal() {
         FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/MenuPrincipal.fxml"));
@@ -153,6 +148,26 @@ public class VerReportesController implements Initializable {
         }
     }
 
+    /**
+     * Muestra un archivo en pantalla, a partir de su ruta
+     *
+     * @param ruta contiene el path del archivo
+     */
+    private void mostrarPdf(String ruta) {
+        try {
+            File path = new File(ruta);
+            Desktop.getDesktop().open(path);
+        } catch (IOException ex) {
+            System.out.println("No se pudo abrir el Reporte:" + ex.getMessage());
+        }
+    }
+
+    /**
+     * Metodo que recibe un reporte y muestra la ventana validar, enviando dicho
+     * reporte
+     *
+     * @param reporte Objeto tipo ReporteMensual
+     */
     private void mostrarVentanaValidar(ReporteMensual reporte) {
         try {
 
@@ -168,7 +183,6 @@ public class VerReportesController implements Initializable {
             stage.setResizable(false);
             ValidarReporteController controller = (ValidarReporteController) loader.getController();
             controller.setReporte(reporte);
-
             stage.setOnHidden(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent event) {
@@ -176,35 +190,20 @@ public class VerReportesController implements Initializable {
                 }
             });
             stage.show();
-            try {
-                File path = new File(reporte.getLink());
-                Desktop.getDesktop().open(path);
-            } catch (IOException ex) {
-                System.out.println("No se pudo abrir el Reporte:" + ex.getMessage());
-            }
+            mostrarPdf(reporte.getLink());
 
         } catch (IOException ex) {
             System.out.println("Error al mostrar ventana Ventas: " + ex);
         }
     }
 
-    private boolean validarEstadoReporte(ReporteMensual reporte) {
-        if (reporte.getEstado().equals("Pendiente")) {
-
-            return true;
-        } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Advertencia");
-            alert.setHeaderText("Seleccione un Reporte Mensual con estado Pendiente");
-            alert.showAndWait();
-            return false;
-        }
-
-    }
-
+    /**
+     * Ocurre cuando el usuario da clic en el boton Validar Reporte, muestra la
+     * ventana si se selecciono un reporte de la tabla
+     */
     @FXML
     private void clicBtValidarReporte() {
-        ReporteMensual reporte = obtenerReporteSeleccionado();
+        ReporteMensual reporte = (ReporteMensual) tablaReportes.getSelectionModel().getSelectedItem();
         if (reporte != null) {
             mostrarVentanaValidar(reporte);
 
@@ -216,6 +215,12 @@ public class VerReportesController implements Initializable {
         }
     }
 
+    /**
+     * Obtiene el numero del ultimo reporte asociado con el seguimiento de la
+     * inscripcion correspondiente
+     *
+     * @return numero del ultimo reporte subido
+     */
     private int obtenerUltimoReporte() {
         ReporteMensualImp reporteImp = new ReporteMensualImp();
         int numero = reporteImp.obtenerUltimoReporte(inscripcion.getSeguimiento().getIdSeguimiento());
@@ -223,6 +228,11 @@ public class VerReportesController implements Initializable {
         return numero;
     }
 
+    /**
+     * Ocurre cuando el usuario da clic el boton Agregar Reporte y muestra la
+     * ventana AgregarReporte.fxml y cuandi se cierra se recarga la tabla de la
+     * ventana actual .
+     */
     @FXML
     private void clicBtAgregarReporte() {
         try {
@@ -252,6 +262,10 @@ public class VerReportesController implements Initializable {
         }
     }
 
+    /**
+     * Asigna los valores correspondientes a las columnas de la tabla con la
+     * informacion de los reportes
+     */
     private void llenarTablaReportes() {
 
         List<ReporteMensual> listaReporteMensual = new ArrayList();

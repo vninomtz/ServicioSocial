@@ -1,7 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Autor: Alan González Heredia
+ * Experiencia Educativa: Principios de Construcción de Software
+ * Docente: Fredy Castañeda Sánchez
+ * Fecha de creación: 10/06/2019
+ * Fecha de ultima actualización: 11/06/2019
+ * Descripción: Controlador de la interfaz ValidarReporte.fxml
  */
 package controlador;
 
@@ -43,6 +46,11 @@ public class ValidarReporteController implements Initializable {
         this.reporte = reporte;
         iniciaInterfaz();
     }
+    
+    /**
+     * Ocurre cuando el usuario da clic en el boton aprobar, cambia el estado del 
+     * reporte a "Validado"
+     */
 
     @FXML
     private void clicBtAprobar() {
@@ -50,11 +58,16 @@ public class ValidarReporteController implements Initializable {
         reporteimp.cambiarEstado("Validado", reporte.getIdReporteMensual());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Reporte Aprobado");
-        alert.setHeaderText("El reporte se aprobo Exitosamente");
+        alert.setHeaderText("Se cambio el estado del reporte ha validado");
         alert.showAndWait();
         Stage principal = (Stage) btnSalir.getScene().getWindow();
         principal.close();
     }
+    
+    /**
+     * Ocurre cuando el usuario da clic en el boton aprobar, cambia el estado del 
+     * reporte a "Validado"
+     */
 
     @FXML
     private void clicBtRechazar() {
@@ -62,12 +75,15 @@ public class ValidarReporteController implements Initializable {
         reporteimp.cambiarEstado("Rechazado", reporte.getIdReporteMensual());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Reporte Reachazo");
-        alert.setHeaderText("El reporte se ha sido rechazado");
+        alert.setHeaderText("Se cambio el estado del reporte ha rechazado");
         alert.showAndWait();
         Stage principal = (Stage) btnSalir.getScene().getWindow();
         principal.close();
     }
-
+    
+    /**
+     * Ocurre cuando el usuario da clic en el boton salir 
+     */
     @FXML
     private void clicBtnSalir() {
         Stage principal = (Stage) btnSalir.getScene().getWindow();

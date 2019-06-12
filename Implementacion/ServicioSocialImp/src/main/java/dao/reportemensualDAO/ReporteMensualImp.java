@@ -1,7 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Autor: Alan González Heredia
+ * Experiencia Educativa: Principios de Construcción de Software
+ * Docente: Fredy Castañeda Sánchez
+ * Fecha de creación: 10/06/2019
+ * Fecha de ultima actualización: 11/06/2019
+ * Descripción: Implementacion del DAO
  */
 package dao.reportemensualDAO;
 
@@ -23,6 +26,12 @@ import modelo.ReporteMensual;
  */
 public class ReporteMensualImp implements IReporteMensual {
 
+    /**
+     * Obtiene todos los reporte con el idSeguimiento asociado
+     *
+     * @param idSeguimiento numero al cual pertenecen los reportes a buscar
+     * @return Lista de ReportesMensuales con dicho idSeguimienti
+     */
     @Override
     public List<ReporteMensual> getReportes(int idSeguimiento) {
         System.out.println("eeeeeeeee");
@@ -30,6 +39,9 @@ public class ReporteMensualImp implements IReporteMensual {
         Connection conexionBD = new ConexionBD().getConexionBD();
         String sQuery = "SELECT * FROM reportemensual where idseguimiento ="
                 + idSeguimiento + ";";
+        if(conexionBD == null) {
+            return null;
+        }
 
         System.out.println(sQuery);
         try {
@@ -59,6 +71,13 @@ public class ReporteMensualImp implements IReporteMensual {
         return listaReportes;
     }
 
+    /**
+     * Cambia el estado de un reporte
+     *
+     * @param nuevoEstado Estado al que se desea cambiar el reporte
+     * @param idReporte numero unico del reporte
+     * @return
+     */
     @Override
     public boolean cambiarEstado(String nuevoEstado, int idReporte) {
         Connection conexionBD = new ConexionBD().getConexionBD();
@@ -75,13 +94,21 @@ public class ReporteMensualImp implements IReporteMensual {
             }
 
         } catch (SQLException ex) {
-            System.out.println(ex);
-            return false;
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con BD");
+            alert.setHeaderText("No se pudo actualizar el estado del reporte, inténtelo más tarde");
+            alert.showAndWait();
         }
         return false;
 
     }
 
+    /**
+     * Guarda un ReporteMensual en la base de datos
+     *
+     * @param reporte ReporteMensual que se desea guardar
+     * @return Verdadero si el reporte pudo guardarse
+     */
     @Override
     public boolean guardarReporte(ReporteMensual reporte) {
         String query = "INSERT INTO reportemensual(horasReportadas,link_reporteMensual,mes_reporteMensual,estado_reporteMensual,noReporte,idseguimiento) VALUES ('" + reporte.getHorasReportadas() + "','"
@@ -96,6 +123,10 @@ public class ReporteMensualImp implements IReporteMensual {
             }
         } catch (SQLException ex) {
             System.out.println("Error en la creacion de el Statement" + ex.getMessage());
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con BD");
+            alert.setHeaderText("No se pudo guardar el reporte mensual intente mas tarde");
+            alert.showAndWait();
         } finally {
             try {
                 conexionBD.close();
@@ -106,12 +137,18 @@ public class ReporteMensualImp implements IReporteMensual {
         return false;
     }
 
+    /**
+     * Devuelve el numero del ultimo reporte ingresado
+     *
+     * @param idseguimiento numero unico del seguimiento
+     * @return numero del ultimo reporte asociado al idSeguimiento
+     */
     @Override
     public int obtenerUltimoReporte(int idseguimiento) {
         String query = "select noReporte from reportemensual "
                 + "where idseguimiento =" + idseguimiento
                 + " order by noReporte desc limit 1 ;";
-        
+
         Connection conexionBD = new ConexionBD().getConexionBD();
         int numero = 0;
         try {
@@ -125,10 +162,13 @@ public class ReporteMensualImp implements IReporteMensual {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(ReporteMensualImp.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error en la creacion de el Statement: " + ex);
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error con BD");
+            alert.setHeaderText("Hubo un error con la conexión a la Base de Datos,"
+                    + "por favor intente más tarde");
+            alert.showAndWait();
         }
-
-        System.out.println(query);
         return numero;
     }
 
