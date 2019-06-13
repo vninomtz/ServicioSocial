@@ -182,6 +182,12 @@ public class AgregarReporteController implements Initializable {
             alert.setHeaderText("Por favor seleccione un reporte");
             alert.showAndWait();
             return false;
+        }else if(Integer.parseInt(txtHoras.getText()) > 100){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Alerta");
+            alert.setHeaderText("Horas invalidas, fuera del limite");
+            alert.showAndWait();
+            return false;
         }
         return true;
     }

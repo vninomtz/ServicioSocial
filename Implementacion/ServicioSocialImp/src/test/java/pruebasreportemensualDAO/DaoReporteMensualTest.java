@@ -30,9 +30,9 @@ public class DaoReporteMensualTest {
 
     }
 
-    @Test
+   // @Test
 
-    public void cambiarEstadoTest() {
+    /*public void cambiarEstadoTest() {
         ReporteMensualImp reporteImp = new ReporteMensualImp();
         boolean resultado = reporteImp.cambiarEstado("Rechazado", 1);
         assertTrue(resultado);
@@ -47,7 +47,7 @@ public class DaoReporteMensualTest {
         boolean resultado = reporteImp.guardarReporte(reporte);
         assertTrue(resultado);
 
-    }
+    }*/
 
     @Test
     public void obtenerUltimoReporte() {

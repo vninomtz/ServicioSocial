@@ -271,13 +271,18 @@ public class VerReportesController implements Initializable {
         List<ReporteMensual> listaReporteMensual = new ArrayList();
         ReporteMensualImp reporteImp = new ReporteMensualImp();
         listaReporteMensual = reporteImp.getReportes(inscripcion.getSeguimiento().getIdSeguimiento());
-        colNumeroReporte.setCellValueFactory(new PropertyValueFactory("numeroReporte"));
-        colMes.setCellValueFactory(new PropertyValueFactory("mes"));
-        colHoras.setCellValueFactory(new PropertyValueFactory("horasReportadas"));
-        colEstado.setCellValueFactory(new PropertyValueFactory("estado"));
+        if (listaReporteMensual == null) {
+            colNumeroReporte.setCellValueFactory(new PropertyValueFactory("numeroReporte"));
+            colMes.setCellValueFactory(new PropertyValueFactory("mes"));
+            colHoras.setCellValueFactory(new PropertyValueFactory("horasReportadas"));
+            colEstado.setCellValueFactory(new PropertyValueFactory("estado"));
 
-        ObservableList<ReporteMensual> observableListReporte = FXCollections.observableArrayList(listaReporteMensual);
-        tablaReportes.setItems(observableListReporte);
+            ObservableList<ReporteMensual> observableListReporte = FXCollections.observableArrayList(listaReporteMensual);
+            tablaReportes.setItems(observableListReporte);
+
+        } else{
+            System.out.println("Tabla vacia");
+        }
 
     }
 
