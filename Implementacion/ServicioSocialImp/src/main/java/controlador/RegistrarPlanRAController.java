@@ -177,8 +177,7 @@ public class RegistrarPlanRAController {
 
         if ((textoNombreProyecto.getText().equals("") != true) && (textoDuracion.getText().equals("")
                 != true) && (textoHorario.getText().equals("") != true)
-                && (textoResponsabilidades.getText().equals("") != true) && (
-                textoDescripcion.getText().equals("") != true) && (this.responsable != null)) {
+                && (textoResponsabilidades.getText().equals("") != true) && (textoDescripcion.getText().equals("") != true) && (this.responsable != null)) {
 
             RegistroPlanActividades registroPlanA = new RegistroPlanActividades();
             registroPlanA.setDescripcion(textoDescripcion.getText());
@@ -190,11 +189,14 @@ public class RegistrarPlanRAController {
             registroPlanA.setResponsableProyecto(this.responsable);
 
             RegistroPlanActividadesImp registroPlanActividadesDAO = new RegistroPlanActividadesImp();
-            registroPlanActividadesDAO.guardarRegistroPlanActividades(registroPlanA);
 
-            Stage ventana = (Stage) botonGuardar.getScene().getWindow();
-            ventana.close();
+            if (registroPlanActividadesDAO.guardarRegistroPlanActividades(registroPlanA) == true) {
 
+                Stage ventana = (Stage) botonGuardar.getScene().getWindow();
+                ventana.close();
+
+            }
+            
         } else {
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -208,7 +210,7 @@ public class RegistrarPlanRAController {
 
     @FXML
     void initialize() {
-        
+
         textoNombre.setEditable(false);
         textoPaterno.setEditable(false);
         textoMaterno.setEditable(false);
