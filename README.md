@@ -7,5 +7,11 @@ Contenido:
   Se incluye un documento con el propósito y alcance del proyecto así como su justificación.
 3.-Modelo del dominio
   Se muestra el diagrama de clases y el de casos de uso para representar el modelo del problema.
+  
+Requisitos:
+Sin esto el proyecto no puede ser ejecutado
+NetBeans 10
+JDK11 de java
+
 
 
