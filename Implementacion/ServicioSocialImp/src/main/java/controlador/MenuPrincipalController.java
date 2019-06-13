@@ -11,6 +11,7 @@ package controlador;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import dao.inscripcionDAO.InscripcionImp;
+import dao.registroPlanActividadesDAO.RegistroPlanActividadesImp;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -20,6 +21,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -53,7 +55,7 @@ public class MenuPrincipalController implements Initializable {
     @FXML
     private JFXButton btnVerReportesMensuales;
     @FXML
-    private JFXButton btnRegistrarProyecto;
+    private JFXButton botonResgitrarProyecto;
     @FXML
     private MenuItem mtAdministrarEstudiantes;
     @FXML
@@ -212,6 +214,52 @@ public class MenuPrincipalController implements Initializable {
         }
     }
 
+    /**
+     * @Descripción: meodo para abrir la ventana de registro de plan de actividades
+     * @param event 
+     */
+    @FXML
+    private void abrirRegistroPlanA(ActionEvent event){
+        
+        try {
+            
+            Inscripcion inscripcion = tablaEstudiantes.getSelectionModel().getSelectedItem();
+            RegistroPlanActividadesImp resgistroPlanActividadesDAO = new RegistroPlanActividadesImp();
+            
+            if((inscripcion != null) && (resgistroPlanActividadesDAO.getResgistroPlanActividades(
+                    inscripcion.getFolioInscripcion()) != null)){
+                
+                FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/"
+                        + "RegistrarPlanRA.fxml"));
+                AnchorPane anchorpane = loader.load();
+                Scene scene = new Scene(anchorpane);
+                scene.getStylesheets().add("/styles/Styles.css");
+                Stage stage = new Stage();
+                stage.setTitle("Registro Plan Y Registro De Actividades");
+                stage.setScene(scene);
+                stage.setResizable(false);
+                RegistrarPlanRAController controller = 
+                        (RegistrarPlanRAController) loader.getController();
+                controller.setInscripcion(inscripcion);
+                stage.show();                
+                
+            }else{
+                
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("Advertencia");
+                alert.setHeaderText("Seleccione un estudiante primero o el estudinate ya cuenta con "
+                        + "un proyecto");
+                alert.showAndWait();
+                
+            }
+            
+        } catch (IOException ex) {
+            
+            System.out.println("Error al mostrar ventana Ventas: " + ex);
+            
+        }
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         llenarTablaEstudiantes();

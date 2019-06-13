@@ -38,7 +38,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btnRegistrarProyecto" layoutY="266.0" prefHeight="45.0" prefWidth="200.0" stylesheets="@../styles/Styles.css" text="Registrar Proyecto" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <JFXButton fx:id="botonResgitrarProyecto" layoutY="266.0" onAction="#abrirRegistroPlanA" prefHeight="53.0" prefWidth="200.0" stylesheets="@../styles/Styles.css" text="Registrar Plan Y Registro De Actividades" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
