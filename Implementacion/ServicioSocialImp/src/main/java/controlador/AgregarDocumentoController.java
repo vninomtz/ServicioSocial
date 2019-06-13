@@ -208,6 +208,16 @@ public class AgregarDocumentoController implements Initializable {
             alert.setHeaderText("Ingresar la descripcion del documento antes de guardar");
             alert.showAndWait();
             return false;
+        } else {
+             String descripcion = txtDescripcion.getText();
+             char primerLetra = descripcion.charAt(0);
+             if(Character.isDigit(primerLetra)) {
+                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Campos Incorrecto");
+                alert.setHeaderText("Se recomienda que la descripcion no inicie con un numero");
+                alert.showAndWait();
+                return false;
+             }
         }
         if (archivo == null) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
