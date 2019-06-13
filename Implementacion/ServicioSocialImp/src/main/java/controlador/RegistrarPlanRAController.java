@@ -29,7 +29,7 @@ import modelo.ResponsableProyecto;
 import serviciosocial.main.MainApp;
 
 public class RegistrarPlanRAController {
-    
+
     //elementos de la interfaz y el controlador
     private Inscripcion inscripcion;
     private ResponsableProyecto responsable;
@@ -105,7 +105,7 @@ public class RegistrarPlanRAController {
     public void cargarDatosResponsable() {
 
         try {
-            
+
             textoNombre.setText(this.responsable.getNombre());
             textoPaterno.setText(this.responsable.getPaterno());
             textoMaterno.setText(this.responsable.getMaterno());
@@ -119,16 +119,16 @@ public class RegistrarPlanRAController {
             textoCorreo.setEditable(false);
 
         } catch (NullPointerException e) {//Excepcion en caso de que se cancele la accion de seleccion
-            
+
             System.out.println("Aun no se selecciona un responsable");
-            
+
         }
 
     }
 
     /**
      * @Descripción: que desarroya la misma acción que los demas botones
-     * @param event 
+     * @param event
      */
     @FXML
     void cancelar(ActionEvent event) {
@@ -137,8 +137,9 @@ public class RegistrarPlanRAController {
     }
 
     /**
-     * @Descripción: metodo para abrir y cargar la ventana para seleccionar el responsable de proyecto
-     * @param event 
+     * @Descripción: metodo para abrir y cargar la ventana para seleccionar el responsable de
+     * proyecto
+     * @param event
      */
     @FXML
     private void mostrarVentanaSeleccion(ActionEvent event) {
@@ -164,9 +165,9 @@ public class RegistrarPlanRAController {
     }
 
     /**
-     * @Descripción: Metodo para guardar el plan y registro de actividades una ves completado todo 
+     * @Descripción: Metodo para guardar el plan y registro de actividades una ves completado todo
      * lo que dice el caso de uso
-     * @param event 
+     * @param event
      */
     @FXML
     public void guardar(ActionEvent event) {
@@ -174,7 +175,7 @@ public class RegistrarPlanRAController {
         if ((textoNombreProyecto.getText().equals("") != true) && (textoDuracion.getText().equals("")
                 != true) && (textoHorario.getText().equals("") != true)
                 && (textoResponsabilidades.getText().equals("") != true) && (
-                textoDescripcion.getText().equals("") != true)) {
+                textoDescripcion.getText().equals("") != true) && (this.responsable != null)) {
 
             RegistroPlanActividades registroPlanA = new RegistroPlanActividades();
             registroPlanA.setDescripcion(textoDescripcion.getText());
@@ -182,7 +183,7 @@ public class RegistrarPlanRAController {
             registroPlanA.setHorario(textoHorario.getText());
             registroPlanA.setNombre(textoNombreProyecto.getText());
             registroPlanA.setResponsabilidades(textoResponsabilidades.getText());
-            registroPlanA.setIdseguimiento(this.inscripcion.getFolioInscripcion());
+            registroPlanA.setIdseguimiento(this.inscripcion.getSeguimiento().getIdSeguimiento());
             registroPlanA.setResponsableProyecto(this.responsable);
 
             RegistroPlanActividadesImp registroPlanActividadesDAO = new RegistroPlanActividadesImp();
@@ -205,5 +206,11 @@ public class RegistrarPlanRAController {
     @FXML
     void initialize() {
         
+        textoNombre.setEditable(false);
+        textoPaterno.setEditable(false);
+        textoMaterno.setEditable(false);
+        textoCargo.setEditable(false);
+        textoCorreo.setEditable(false);
+
     }
 }

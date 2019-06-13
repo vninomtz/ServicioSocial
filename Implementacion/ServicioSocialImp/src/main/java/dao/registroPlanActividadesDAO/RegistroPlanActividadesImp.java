@@ -33,7 +33,7 @@ public class RegistroPlanActividadesImp implements IRegistroPlanActividades {
         //Sentencia que se hara para obtener informacion de la base de datos
         String sentencia = "INSERT INTO registroplandeactividades (descripcion_planActividades, "
                 + "duracion_planActividades, horario_planActividades, nombre_planActividades, "
-                + "responasabilidades_planActividades, idseguimiento, idresponsableProyecto) VALUES ('"
+                + "responsabilidades_planActividades, idseguimiento, idresponsableProyecto) VALUES ('"
                 + registroPlanA.getDescripcion() + "','"
                 + registroPlanA.getDuracion() + "','"
                 + registroPlanA.getHorario() + "','"

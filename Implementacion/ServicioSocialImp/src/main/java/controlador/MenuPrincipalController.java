@@ -38,6 +38,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import modelo.Inscripcion;
+import modelo.RegistroPlanActividades;
 import serviciosocial.main.MainApp;
 
 public class MenuPrincipalController implements Initializable {
@@ -226,8 +227,7 @@ public class MenuPrincipalController implements Initializable {
             Inscripcion inscripcion = tablaEstudiantes.getSelectionModel().getSelectedItem();
             RegistroPlanActividadesImp resgistroPlanActividadesDAO = new RegistroPlanActividadesImp();
             
-            if((inscripcion != null) && (resgistroPlanActividadesDAO.getResgistroPlanActividades(
-                    inscripcion.getFolioInscripcion()) != null)){
+            if((inscripcion != null)){
                 
                 FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/"
                         + "RegistrarPlanRA.fxml"));

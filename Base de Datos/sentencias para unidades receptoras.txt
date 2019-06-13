@@ -1,0 +1,3 @@
+INSERT INTO unidadReceptora SET ciuda = " Xalapa", correoelectronico = "gameplanet@gmail.com", direccion = "Revolucion #15", estado = "Veracruz", nombre = "Game Planet S.A. De C.V.", nombreDirectivo = "Juan Perez", telefono = "2283085075";
+INSERT INTO unidadReceptora SET ciuda = " Xalapa", correoelectronico = "copiasEra@gmail.com", direccion = "Xalapeños Ilustres #15", estado = "Veracruz", nombre = "Copias ERA S.A De C.V.", nombreDirectivo = "Juan Lopez", telefono = "2283085076";
+INSERT INTO unidadReceptora SET ciuda = " Xalapa", correoelectronico = "elolimpo@gmail.com", direccion = "Avila Camacho #15", estado = "Veracruz", nombre = "El olimpio S.A De C.V.", nombreDirectivo = "Juan Suarez", telefono = "2283085077";
