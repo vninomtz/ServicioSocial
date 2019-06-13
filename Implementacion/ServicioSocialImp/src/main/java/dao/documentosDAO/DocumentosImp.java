@@ -1,7 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Autor: Victor Manuel Niño Martínez
+ * Experiencia Educativa: Principios de Construcción de Software
+ * Docente: Fredy Castañeda Sánchez
+ * Fecha de creación: 10/06/2019
+ * Fecha de ultima actualización: 11/06/2019
+ * Descripción: Implementación de la interfaz IDocumentos para la persistencia
+ * de los datos
  */
 package dao.documentosDAO;
 
@@ -23,6 +27,12 @@ import modelo.Documento;
  */
 public class DocumentosImp implements IDocumento{
 
+    /**
+     * Método que obtiene de la base de datos una lista de los Documento de
+     * un Seguimiento
+     * @param idSeguimiento identificador unico de un seguimiento 
+     * @return lista de los Documento de un seguimiento
+     */
     @Override
     public List<Documento> getDocumentos(int idSeguimiento) {
         List<Documento> listaDocumentos = new ArrayList();
@@ -67,6 +77,12 @@ public class DocumentosImp implements IDocumento{
         return listaDocumentos;
     }
 
+    /**
+     * Método que guarda en la base de datos un Documento
+     * @param documento objeto de tipo Documento
+     * @return true en caso de que se haya guardado con exito el Documento
+     * false en caso contrario 
+     */
     @Override
     public boolean guardarDocumento(Documento documento) {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
@@ -113,6 +129,13 @@ public class DocumentosImp implements IDocumento{
         return false;
     }
 
+    /**
+     * Método que actualiza el atributo estado del Documento
+     * @param estado estado al que sera actualizado el documento
+     * @param idDocumento identificador unico e un Documento
+     * @return true en caso de que se haya actualizado exitosamente y false 
+     * en caso contrario
+     */
     @Override
     public boolean actualizarEstadoDocumento(String estado, int idDocumento) {
          String sentencia = "UPDATE documento SET estado_documento = '" + estado 

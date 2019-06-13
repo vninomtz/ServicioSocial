@@ -1,7 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Autor: Victor Manuel Niño Martínez
+ * Experiencia Educativa: Principios de Construcción de Software
+ * Docente: Fredy Castañeda Sánchez
+ * Fecha de creación: 10/06/2019
+ * Fecha de ultima actualización: 11/06/2019
+ * Descripción: Implementación de la interfaz IInicioSesion para la persistencia
+ * de los datos
  */
 package dao.inicioSesion;
 
@@ -19,6 +23,12 @@ import modelo.InicioSesion;
  */
 public class InicioSesionImp implements IInicioSesion{
 
+    /**
+     * Método que consulta la existencia de un usuario en la base de datos
+     * @param usuario 
+     * @param contrasenia
+     * @return regresa true si exite el usuario y false si no existe
+     */
     @Override
     public boolean isUsuarioRegistrado(String usuario, String contrasenia) {
        InicioSesion inicioSesion = new InicioSesion();

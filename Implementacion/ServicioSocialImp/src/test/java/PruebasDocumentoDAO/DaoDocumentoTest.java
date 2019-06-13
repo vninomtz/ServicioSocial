@@ -5,6 +5,9 @@
  */
 package PruebasDocumentoDAO;
 
+import dao.documentosDAO.DocumentosImp;
+import java.util.List;
+import modelo.Documento;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,8 +22,17 @@ public class DaoDocumentoTest {
     
     
     @Test
-    public void getDocumentos(){
-        
+    public void getDocumentosTest() {
+        DocumentosImp documentos = new DocumentosImp();
+        List<Documento> listaDoc = documentos.getDocumentos(1);
+        assertNotNull(listaDoc);
     }
     
+    @Test
+    public void actualizarEstadoDocumentoTest() {
+        DocumentosImp documentos = new DocumentosImp();
+        boolean respuesta = documentos.actualizarEstadoDocumento("Validado", 14);
+        assertTrue(respuesta);
+    }
+     
 }

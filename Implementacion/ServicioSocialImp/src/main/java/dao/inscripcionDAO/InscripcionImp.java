@@ -1,7 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Autor: Victor Manuel Niño Martínez
+ * Experiencia Educativa: Principios de Construcción de Software
+ * Docente: Fredy Castañeda Sánchez
+ * Fecha de creación: 10/06/2019
+ * Fecha de ultima actualización: 11/06/2019
+ * Descripción: Implementación de la interfaz IInscripcion para la persistencia
+ * de los datos
  */
 package dao.inscripcionDAO;
 
@@ -21,6 +25,11 @@ import modelo.Inscripcion;
  */
 public class InscripcionImp implements IInscripcion{
 
+    /**
+     * Método para obtener la lista de las Inscripcion registradas en la
+     * base de datos
+     * @return lista de Inscricion de la base de datos
+     */
     @Override
     public List<Inscripcion> getInscripciones() {
         List<Inscripcion> listaInscripciones = new ArrayList();
@@ -85,6 +94,13 @@ public class InscripcionImp implements IInscripcion{
         return listaInscripciones;
     }
 
+    /**
+     * Método para obtener la lista de las Inscripcion registradas en la
+     * base de datos
+     * @param idEstudiante identificador unico del un Estudiante que servira 
+     * para filtrar la consulta
+     * @return lista de Inscripcion con la base de datos
+     */
     @Override
     public List<Inscripcion>  getInscripcion(int idEstudiante) {
          List<Inscripcion> listaInscripciones = new ArrayList();
