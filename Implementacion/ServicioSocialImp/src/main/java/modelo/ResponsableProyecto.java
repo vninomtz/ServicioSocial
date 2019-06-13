@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
-/**
- *
- * @author Vik-t
- */
 public class ResponsableProyecto {
+    
+    //Atributos
     private int idResponsableProyecto;
     private String cargo;
     private String correoElectronico;
@@ -18,6 +11,7 @@ public class ResponsableProyecto {
     private String materno;
     private UnidadReceptora unidadReceptora = new UnidadReceptora();
 
+    //Metodos
     public ResponsableProyecto() {
     }
 

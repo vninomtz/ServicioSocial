@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.RegistrarPlanRAController">
+   <children>
+      <AnchorPane layoutX="14.0" prefHeight="95.0" prefWidth="570.0" style="-fx-background-color: #dee6f2;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <ImageView fitHeight="64.0" fitWidth="65.0" layoutX="10.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/addDocumento.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="99.0" layoutY="11.0" prefHeight="73.0" prefWidth="380.0" text="Asignación Plan Y Registro De Actividades" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelNombre" layoutX="523.0" layoutY="22.0" text="Nombre:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelMatricula" layoutX="522.0" layoutY="49.0" text="Matricula:">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Separator layoutX="10.0" layoutY="94.0" prefHeight="0.0" prefWidth="519.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <AnchorPane layoutX="25.0" layoutY="129.0" prefHeight="200.0" prefWidth="750.0" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 15px; -fx-border-color: #000000; -fx-border-radius: 15px;">
+         <children>
+            <JFXTextField fx:id="textoNombreProyecto" labelFloat="true" layoutX="14.0" layoutY="16.0" prefHeight="35.0" prefWidth="466.0" promptText="Nombre Del Proyecto:" />
+            <JFXTextField fx:id="textoDuracion" labelFloat="true" layoutX="496.0" layoutY="16.0" prefHeight="35.0" prefWidth="240.0" promptText="Duración:" />
+            <JFXTextArea fx:id="textoDescripcion" labelFloat="true" layoutX="14.0" layoutY="122.0" prefHeight="73.0" prefWidth="717.0" promptText="Descripción:" />
+            <JFXTextField fx:id="textoResponsabilidades" labelFloat="true" layoutX="383.0" layoutY="72.0" prefHeight="35.0" prefWidth="348.0" promptText="Responsabilidades:" />
+            <JFXTextField fx:id="textoHorario" labelFloat="true" layoutX="13.0" layoutY="72.0" prefHeight="35.0" prefWidth="348.0" promptText="Horario:" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="25.0" layoutY="355.0" prefHeight="129.0" prefWidth="750.0" style="-fx-background-color: #FFFFFFFF; -fx-background-radius: 15px; -fx-border-color: #000000; -fx-border-radius: 15px;">
+         <children>
+            <JFXTextField fx:id="textoNombre" labelFloat="true" layoutX="14.0" layoutY="17.0" prefHeight="35.0" prefWidth="220.0" promptText="Nombre:" />
+            <JFXTextField fx:id="textoPaterno" labelFloat="true" layoutX="259.0" layoutY="17.0" prefHeight="35.0" prefWidth="220.0" promptText="Paterno:" />
+            <JFXTextField fx:id="textoMaterno" labelFloat="true" layoutX="503.0" layoutY="17.0" prefHeight="35.0" prefWidth="220.0" promptText="Materno:" />
+            <JFXTextField fx:id="textoCargo" labelFloat="true" layoutX="14.0" layoutY="87.0" prefHeight="35.0" prefWidth="220.0" promptText="Cargo:" />
+            <JFXTextField fx:id="textoCorreo" labelFloat="true" layoutX="259.0" layoutY="87.0" prefHeight="35.0" prefWidth="251.0" promptText="Correo:" />
+            <JFXButton fx:id="botonSeleccionarResponsable" buttonType="RAISED" layoutX="533.0" layoutY="74.0" onAction="#mostrarVentanaSeleccion" prefHeight="42.0" prefWidth="190.0" style="-fx-background-color: #009688;" text="Seleccionar Responsable Del Proyecto" textAlignment="CENTER" textFill="#0d0d0d" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <Label layoutX="25.0" layoutY="101.0" text="Información Plan Y Registro De Actividades">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="25.0" layoutY="333.0" text="Información Responsable Del Proyecto">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="botonCancelar" buttonType="RAISED" layoutX="701.0" layoutY="501.0" onAction="#cancelar" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #dee6f2;" text="Cancelar" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="botonGuardar" buttonType="RAISED" layoutX="558.0" layoutY="501.0" onAction="#guardar" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: #0055A3;" text="Guardar" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="608.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.SeleccionarResponsableController">
+   <children>
+      <AnchorPane layoutX="3.0" layoutY="1.0" prefHeight="95.0" prefWidth="570.0" style="-fx-background-color: #dee6f2;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="64.0" fitWidth="65.0" layoutX="106.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/addDocumento.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="202.0" layoutY="32.0" text="Selecionar Responsable Del Proyecto" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Separator layoutX="114.0" layoutY="94.0" prefHeight="0.0" prefWidth="519.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <TableView fx:id="tablaResponsables" focusTraversable="false" layoutX="17.0" layoutY="121.0" prefHeight="431.0" prefWidth="767.0">
+        <columns>
+          <TableColumn fx:id="columnaNombre" prefWidth="189.66665649414062" text="NOMBRE" />
+          <TableColumn fx:id="columnaPaterno" prefWidth="142.66665649414062" text="PATERNO" />
+            <TableColumn fx:id="columnaMaterno" minWidth="2.9999847412109375" prefWidth="126.33334350585938" text="MATERNO" />
+            <TableColumn fx:id="columnaCorreo" prefWidth="148.66665649414062" text="CORREO" />
+            <TableColumn fx:id="columnaCargo" prefWidth="145.6666259765625" text="CARGO" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="botonCancelar" buttonType="RAISED" layoutX="710.0" layoutY="569.0" onAction="#cancelar" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #dee6f2;" text="Cancelar" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="botonAsignar" buttonType="RAISED" layoutX="550.0" layoutY="569.0" onAction="#asignarResponsableR" prefHeight="25.0" prefWidth="141.0" style="-fx-background-color: #0055A3;" text="Asignar Responsable" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="botonAgregarResponsable" buttonType="RAISED" layoutX="24.0" layoutY="569.0" onAction="#mostrarVentanaRegistroRP" prefHeight="25.0" prefWidth="190.0" style="-fx-background-color: #009688;" text="Agregar Responsable" textAlignment="CENTER" textFill="#0d0d0d">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
