@@ -22,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.Inscripcion;
 import modelo.RegistroPlanActividades;
@@ -153,6 +154,8 @@ public class RegistrarPlanRAController {
             stage.setTitle("Selección Responsable");
             stage.setScene(scene);
             stage.setResizable(false);
+            stage.alwaysOnTopProperty();
+            stage.initModality(Modality.APPLICATION_MODAL);
             SeleccionarResponsableController controller
                     = (SeleccionarResponsableController) loader.getController();
             controller.setController(this);

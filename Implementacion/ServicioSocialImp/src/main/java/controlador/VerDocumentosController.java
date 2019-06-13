@@ -93,7 +93,7 @@ public class VerDocumentosController implements Initializable {
             try {
                 AnchorPane anchorpane = loader.load();
                 Scene scene = new Scene(anchorpane);
-                scene.getStylesheets().add("/styles/Styles.css");
+                //scene.getStylesheets().add("/styles/Styles.css");
                 Stage stage = new Stage();
                 stage.setTitle("Servicio Social - Inicio Sesion");
                 stage.getIcons().add(new Image("/fxml/img/User1.png"));

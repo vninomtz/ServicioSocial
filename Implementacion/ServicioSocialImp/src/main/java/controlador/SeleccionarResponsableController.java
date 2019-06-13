@@ -25,6 +25,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.ResponsableProyecto;
 import serviciosocial.main.MainApp;
@@ -128,6 +129,8 @@ public class SeleccionarResponsableController {
             stage.setTitle("Resgistro Responsable Del Proyecto");
             stage.setScene(scene);
             stage.setResizable(false);
+            stage.alwaysOnTopProperty();
+            stage.initModality(Modality.APPLICATION_MODAL);
             RegistrarResponsableController controller
                     = (RegistrarResponsableController) loader.getController();
             stage.showAndWait();

@@ -64,8 +64,8 @@
             </Menu>
          </menus>
       </MenuBar>
-      <JFXTextField fx:id="txtBuscarEstudiante" layoutX="527.0" layoutY="42.0" prefHeight="25.0" prefWidth="159.0" promptText="Ej: Juan Carlos" AnchorPane.rightAnchor="14.0" />
-      <JFXButton fx:id="btnBuscar" buttonType="RAISED" layoutX="453.0" layoutY="44.0" style="-fx-background-color: #0055A3;" text="Buscar" textFill="WHITE" AnchorPane.rightAnchor="193.0">
+      <JFXTextField fx:id="txtBuscarEstudiante" layoutX="527.0" layoutY="42.0" prefHeight="25.0" prefWidth="159.0" promptText="Ej: Juan Carlos" visible="false" AnchorPane.rightAnchor="14.0" />
+      <JFXButton fx:id="btnBuscar" buttonType="RAISED" layoutX="453.0" layoutY="44.0" style="-fx-background-color: #0055A3;" text="Buscar" textFill="WHITE" visible="false" AnchorPane.rightAnchor="193.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

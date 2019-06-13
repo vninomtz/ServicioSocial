@@ -33,7 +33,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btnSalir" layoutY="266.0" onAction="#ventanaMenuPrincipal" prefHeight="45.0" prefWidth="200.0" stylesheets="@../styles/Styles.css" text="Regresar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <JFXButton fx:id="btnRegresar" layoutY="266.0" onAction="#ventanaMenuPrincipal" prefHeight="45.0" prefWidth="200.0" stylesheets="@../styles/Styles.css" text="Regresar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

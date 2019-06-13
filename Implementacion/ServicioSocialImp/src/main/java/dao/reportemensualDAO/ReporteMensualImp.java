@@ -15,8 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javafx.scene.control.Alert;
 import modelo.ReporteMensual;
 
@@ -34,7 +33,6 @@ public class ReporteMensualImp implements IReporteMensual {
      */
     @Override
     public List<ReporteMensual> getReportes(int idSeguimiento) {
-        System.out.println("eeeeeeeee");
         List<ReporteMensual> listaReportes = new ArrayList();
         Connection conexionBD = new ConexionBD().getConexionBD();
         String sQuery = "SELECT * FROM reportemensual where idseguimiento ="
@@ -57,7 +55,6 @@ public class ReporteMensualImp implements IReporteMensual {
                 reporte.setNumeroReporte(rs.getInt("noReporte"));
                 reporte.setIdSeguimiento(rs.getInt("idseguimiento"));
                 listaReportes.add(reporte);
-                System.out.println(reporte.getEstado());
 
             }
         } catch (SQLException ex) {
@@ -111,8 +108,17 @@ public class ReporteMensualImp implements IReporteMensual {
      */
     @Override
     public boolean guardarReporte(ReporteMensual reporte) {
+        String rutaOriginal = reporte.getLink();
+        String separador = Pattern.quote("\\");
+        String[] rutaPartida = rutaOriginal.split(separador);
+        String nuevaRuta = "";
+        for(String ruta : rutaPartida) {
+            nuevaRuta += ruta + "\\\\";
+        }
+        String rutaFinal = nuevaRuta.substring(0, nuevaRuta.length() - 2);
+        
         String query = "INSERT INTO reportemensual(horasReportadas,link_reporteMensual,mes_reporteMensual,estado_reporteMensual,noReporte,idseguimiento) VALUES ('" + reporte.getHorasReportadas() + "','"
-                + reporte.getLink() + "','" + reporte.getMes() + "','" + "Pendiente" + "','" + reporte.getNumeroReporte() + "','" + reporte.getIdSeguimiento() + "');";
+                + rutaFinal + "','" + reporte.getMes() + "','" + "Pendiente" + "','" + reporte.getNumeroReporte() + "','" + reporte.getIdSeguimiento() + "');";
         System.out.println(query);
         Connection conexionBD = new ConexionBD().getConexionBD();
         try {
@@ -128,11 +134,11 @@ public class ReporteMensualImp implements IReporteMensual {
             alert.setHeaderText("No se pudo guardar el reporte mensual intente mas tarde");
             alert.showAndWait();
         } finally {
-            try {
+            /*try {
                 conexionBD.close();
             } catch (SQLException ex) {
                 System.out.println("Error al cerrar la conexion" + ex.getMessage());
-            }
+            }*/
         }
         return false;
     }

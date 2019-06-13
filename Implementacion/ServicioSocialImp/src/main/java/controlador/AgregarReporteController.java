@@ -126,6 +126,8 @@ public class AgregarReporteController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         Stage stage = new Stage();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Pdf Files", "*.pdf"));
         archivo = fileChooser.showOpenDialog(stage);
         if (archivo != null) {
             lbArchivoAdjunto.setText(archivo.getName());
